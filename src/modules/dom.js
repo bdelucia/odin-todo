@@ -11,8 +11,10 @@ export function popupForm () {
     const dueDateInput = document.createElement('input');
     const prioritySelect = document.createElement('select');
     const submitButton = document.createElement('button');
+    const overlay = document.createElement('div');
+
     form.id = 'form';
-    form.action = '/submit';
+    form.action = 'submit';
     form.method = 'POST';
 
     titleLabel.setAttribute('for', 'title');
@@ -51,11 +53,32 @@ export function popupForm () {
     submitButton.type = 'submit';
     submitButton.textContent = 'Submit';
 
-    form.append(titleLabel, titleInput);
-    form.append(descLabel, descInput);
-    form.append(dueDateLabel, dueDateInput);
-    form.append(priorityLabel, prioritySelect);
-    form.appendChild(submitButton);
+    form.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, prioritySelect, submitButton);
+    
+    overlay.id = 'popup-overlay';
 
-    content.appendChild(form);
+    function showForm() {
+        form.style.display = 'flex'; 
+        form.style.flexDirection = 'column';
+        overlay.style.display = 'block'; 
+        setTimeout(() => {
+            form.style.opacity = '1';
+        }, 10);
+    }
+
+    function hideForm() {
+        form.style.opacity = '0';
+        setTimeout(() => {
+            form.style.display = 'none';
+            overlay.style.display = 'none';
+        }, 300);
+    }
+
+    const button = document.createElement('button');
+    button.textContent = 'Add To-Do Item';
+    button.addEventListener('click', showForm);
+
+    submitButton.addEventListener('click', hideForm);
+
+    content.append(form, overlay, button);
 }
