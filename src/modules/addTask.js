@@ -79,18 +79,21 @@ function hideForm(form, overlay) {
     }, 300);
 }
 
-export function popupForm() {
+export function addTaskFormHandler() {
     const form = createForm();
     const overlay = createOverlay();
     const content = document.getElementById('content');
     const addTaskBtn = document.getElementById('addTaskBtn');
+    const formSubmitBtn = form.querySelector('button');
 
     // Event listeners for showing and hiding the form
     addTaskBtn.addEventListener('click', () => showForm(form, overlay));
-    form.querySelector('button').addEventListener('click', (event) => {
+    formSubmitBtn.addEventListener('click', (event) => {
         event.preventDefault();
         hideForm(form, overlay);
+        
     });
 
+    // appends the overlay with the form to content, by default its invisible
     content.append(form, overlay);
 }
