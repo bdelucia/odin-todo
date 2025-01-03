@@ -1,4 +1,5 @@
 // creates an element of type, with optional attributes as an object
+let taskList = [];
 function createElement(type, attributes = {}) {
     const element = document.createElement(type);
     Object.keys(attributes).forEach(key => {
@@ -98,6 +99,26 @@ function getFormValues(form){
     };
 }
 
+function createTask(title, desc, dueDate, priority){
+    return {
+        title: title,
+        desc: desc,
+        dueDate: dueDate,
+        priority: priority,
+    }
+}
+
+function printTaskList(){
+    console.log("Tasks list: ");
+    taskList.forEach(task => {
+        console.log(task);
+    })
+}
+
+function addTaskToList(task){
+    taskList.push(task);
+}
+
 export function addTaskFormHandler() {
     const form = createForm();
     const overlay = createOverlay();
@@ -111,15 +132,11 @@ export function addTaskFormHandler() {
         const { taskTitle, taskDesc, taskDueDate, taskPriority } = getFormValues(form);
 
         if(taskTitle !== "" || taskTitle.trim()){
+            event.preventDefault();
             hideForm(form, overlay);
-            console.log('Task Title:', taskTitle);
-            console.log('Task Description:', taskDesc);
-            console.log('Task Due Date:', taskDueDate);
-            console.log('Task Priority:', taskPriority);
-            //addTask(taskTitle, taskDesc, taskDueDate, taskPriority);
+            addTaskToList(createTask(taskTitle, taskDesc, taskDueDate, taskPriority))
+            printTaskList();
         }
-        
-
     });
 
     // appends the overlay with the form to content, by default its invisible
