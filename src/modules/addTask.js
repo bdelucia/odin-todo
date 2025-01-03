@@ -79,6 +79,25 @@ function hideForm(form, overlay) {
     }, 300);
 }
 
+function getFormValues(form){
+    const taskTitle = form.querySelector('#title');
+    const taskDesc = form.querySelector('#desc');
+    const taskDueDate = form.querySelector('#dueDate');
+    const taskPriority = form.querySelector('#priority');
+
+    if (taskTitle === null) {
+        alert('Please give your task a title.');
+        return false;  // Return false if the title is empty
+    }
+
+    return { 
+        taskTitle: taskTitle.value,
+        taskDesc: taskDesc.value,
+        taskDueDate: taskDueDate.value,
+        taskPriority: taskPriority.value
+    };
+}
+
 export function addTaskFormHandler() {
     const form = createForm();
     const overlay = createOverlay();
@@ -89,9 +108,18 @@ export function addTaskFormHandler() {
     // Event listeners for showing and hiding the form
     addTaskBtn.addEventListener('click', () => showForm(form, overlay));
     formSubmitBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        hideForm(form, overlay);
+        const { taskTitle, taskDesc, taskDueDate, taskPriority } = getFormValues(form);
+
+        if(taskTitle !== "" || taskTitle.trim()){
+            hideForm(form, overlay);
+            console.log('Task Title:', taskTitle);
+            console.log('Task Description:', taskDesc);
+            console.log('Task Due Date:', taskDueDate);
+            console.log('Task Priority:', taskPriority);
+            //addTask(taskTitle, taskDesc, taskDueDate, taskPriority);
+        }
         
+
     });
 
     // appends the overlay with the form to content, by default its invisible
