@@ -21,21 +21,22 @@ export function popupForm () {
     titleInput.id = 'title';
     titleInput.name = 'title';
     titleInput.type = 'text';
-    titleInput.placeholder = 'Enter a title for your to-do list item';
+    titleInput.placeholder = 'Enter a title';
+    titleInput.required = 'true';
 
     descLabel.setAttribute('for', 'desc');
     descLabel.textContent = 'Description: ';
     descInput.id = 'desc';
     descInput.name = 'desc';
     descInput.type = 'text';
-    descInput.placeholder = 'Enter a description for your to-do list item';
+    descInput.placeholder = 'Enter a description';
 
     dueDateLabel.setAttribute('for', 'dueDate');
     dueDateLabel.textContent = 'Due date: ';
     dueDateInput.id = 'dueDate';
     dueDateInput.name = 'dueDate';
     dueDateInput.type = 'date';
-    dueDateInput.placeholder = 'Enter a due-date for your to-do list item';
+    dueDateInput.placeholder = 'Enter a due-date';
 
     priorityLabel.setAttribute('for', 'priority');
     priorityLabel.textContent = 'Priority: ';
