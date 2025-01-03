@@ -11,6 +11,7 @@ export function popupForm () {
     const dueDateInput = document.createElement('input');
     const prioritySelect = document.createElement('select');
     const submitButton = document.createElement('button');
+    form.id = 'form';
     form.action = '/submit';
     form.method = 'POST';
 
