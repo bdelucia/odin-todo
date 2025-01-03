@@ -75,12 +75,5 @@ export function popupForm () {
     }
     submitButton.addEventListener('click', hideForm);
 
-    const addTodoItemBtn = document.createElement('button');
-    addTodoItemBtn.textContent = 'Add To-Do Item';
-    addTodoItemBtn.className = 'sidebar-item';
-    addTodoItemBtn.addEventListener('click', showForm);
-
-    sidebar.append(addTodoItemBtn);
-
     content.append(form, overlay);
 }

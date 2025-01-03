@@ -11,18 +11,23 @@ module.exports = {
 
   },
 
+  devtool: 'eval-source-map',
+  devServer: {
+    watchFiles: ['./src/index.html'],
+  },
+
   plugins: [
 
     new HtmlWebpackPlugin({
 
-        title: 'Production',
+        title: 'development',
         template: './src/index.html',
     }),
 
   ],
 
   module: {
-        rules: [
+      rules: [
         {
             test: /\.css$/i, 
             use: [
@@ -34,12 +39,12 @@ module.exports = {
             test: /\.(png|svg|jpg|jpeg|gif)$/i,
             type: "asset/resource",
         }
-        ],
-    },
+      ],
+  },
 
   output: {
 
-    filename: '[name].bundle.js',
+    filename: 'main.js',
 
     path: path.resolve(__dirname, 'dist'),
 
