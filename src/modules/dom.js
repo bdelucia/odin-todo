@@ -1,4 +1,5 @@
 const content = document.getElementById('content');
+const sidebar = document.getElementById('sidebar');
 
 export function popupForm () {
     const form = document.createElement('form');
@@ -14,8 +15,6 @@ export function popupForm () {
     const overlay = document.createElement('div');
 
     form.id = 'form';
-    form.action = 'submit';
-    form.method = 'POST';
 
     titleLabel.setAttribute('for', 'title');
     titleLabel.textContent = 'Title: ';
@@ -73,12 +72,14 @@ export function popupForm () {
             overlay.style.display = 'none';
         }, 300);
     }
-
-    const button = document.createElement('button');
-    button.textContent = 'Add To-Do Item';
-    button.addEventListener('click', showForm);
-
     submitButton.addEventListener('click', hideForm);
 
-    content.append(form, overlay, button);
+    const addTodoItemBtn = document.createElement('button');
+    addTodoItemBtn.textContent = 'Add To-Do Item';
+    addTodoItemBtn.className = 'sidebar-item';
+    addTodoItemBtn.addEventListener('click', showForm);
+
+    sidebar.append(addTodoItemBtn);
+
+    content.append(form, overlay);
 }
