@@ -1,79 +1,62 @@
 const content = document.getElementById('content');
 const sidebar = document.getElementById('sidebar');
+const addTaskBtn = document.getElementById('addTaskBtn');
 
-export function popupForm () {
-    const form = document.createElement('form');
-    const titleLabel = document.createElement('label');
-    const descLabel = document.createElement('label');
-    const dueDateLabel = document.createElement('label');
-    const priorityLabel = document.createElement('label');
-    const titleInput = document.createElement('input');
-    const descInput = document.createElement('input');
-    const dueDateInput = document.createElement('input');
-    const prioritySelect = document.createElement('select');
-    const submitButton = document.createElement('button');
-    const overlay = document.createElement('div');
+// creates an element of type, with optional attributes as an object
+function createElement(type, attributes = {}) {
+    const element = document.createElement(type);
+    Object.keys(attributes).forEach(key => {
+        element.setAttribute(key, attributes[key]);
+    });
+    return element;
+}
 
-    form.id = 'form';
+// creates an input
+function createInput(id, type, placeholder, required = false){
+    const input = createElement('input', { id, name: id, type, placeholder });
+    if(required) input.required = 'true';
+    return input;
+}
 
-    titleLabel.setAttribute('for', 'title');
-    titleLabel.textContent = 'Title: ';
-    titleInput.id = 'title';
-    titleInput.name = 'title';
-    titleInput.type = 'text';
-    titleInput.placeholder = 'Enter a title';
-    titleInput.required = 'true';
+// creates label partner element for an element, used in createForm() with createInput() to make input-label pairs
+function createLabel(forElement, textContent) {
+    const label = createElement('label', { for: forElement });
+    label.textContent = textContent;
+    return label;
+}
 
-    descLabel.setAttribute('for', 'desc');
-    descLabel.textContent = 'Description: ';
-    descInput.id = 'desc';
-    descInput.name = 'desc';
-    descInput.type = 'text';
-    descInput.placeholder = 'Enter a description';
-
-    dueDateLabel.setAttribute('for', 'dueDate');
-    dueDateLabel.textContent = 'Due date: ';
-    dueDateInput.id = 'dueDate';
-    dueDateInput.name = 'dueDate';
-    dueDateInput.type = 'date';
-    dueDateInput.placeholder = 'Enter a due-date';
-
-    priorityLabel.setAttribute('for', 'priority');
-    priorityLabel.textContent = 'Priority: ';
-    prioritySelect.id = 'priority';
-    prioritySelect.name = 'priority';
+// creates priority dropdown menu for task form
+function createPrioritySelect() {
+    const select = createElement('select', { id: 'priority', name: 'priority'});
     const options = ['None', 'Low', 'Medium', 'High'];
     options.forEach(option => {
-      const optionElement = document.createElement('option');
-      optionElement.value = option.toLowerCase();
-      optionElement.textContent = option;
-      prioritySelect.appendChild(optionElement);
+        const optionElement = createElement('option', { value: option.toLowerCase() });
+        optionElement.textContent = option;
+        select.appendChild(optionElement);
     });
+    return select;
+}
 
-    submitButton.type = 'submit';
+// creates a form with task fields to fill out
+export function createForm() {
+    const form = createElement('form', { id: 'form' });
+
+    const titleLabel = createLabel('title', 'Title: ');
+    const titleInput = createInput('title', 'text', 'Enter a title', true); // title is required
+
+    const descLabel = createLabel('desc', 'Description: ');
+    const descInput = createInput('desc', 'text', 'Enter a description');
+
+    const dueDateLabel = createLabel('dueDate', 'Due date: ');
+    const dueDateInput = createInput('dueDate', 'date', 'Enter a due-date');
+
+    const priorityLabel = createLabel('priority', 'Priority: ');
+    const prioritySelect = createPrioritySelect();
+
+    const submitButton = createElement('button', { type: 'submit' });
     submitButton.textContent = 'Submit';
 
     form.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, prioritySelect, submitButton);
-    
-    overlay.id = 'popup-overlay';
 
-    function showForm() {
-        form.style.display = 'flex'; 
-        form.style.flexDirection = 'column';
-        overlay.style.display = 'block'; 
-        setTimeout(() => {
-            form.style.opacity = '1';
-        }, 10);
-    }
-
-    function hideForm() {
-        form.style.opacity = '0';
-        setTimeout(() => {
-            form.style.display = 'none';
-            overlay.style.display = 'none';
-        }, 300);
-    }
-    submitButton.addEventListener('click', hideForm);
-
-    content.append(form, overlay);
+    return form;
 }
