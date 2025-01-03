@@ -1,7 +1,3 @@
-const content = document.getElementById('content');
-const sidebar = document.getElementById('sidebar');
-const addTaskBtn = document.getElementById('addTaskBtn');
-
 // creates an element of type, with optional attributes as an object
 function createElement(type, attributes = {}) {
     const element = document.createElement(type);
@@ -59,4 +55,42 @@ export function createForm() {
     form.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, prioritySelect, submitButton);
 
     return form;
+}
+
+function createOverlay() {
+    return createElement('div', { id: 'popup-overlay' });
+}
+
+// changes form.style from 'none' so it displays itself
+function showForm(form, overlay) {
+    form.style.display = 'flex';
+    form.style.flexDirection = 'column';
+    overlay.style.display = 'block';
+    setTimeout(() => {
+        form.style.opacity = '1';
+    }, 10);
+}
+
+function hideForm(form, overlay) {
+    form.style.opacity = '0';
+    setTimeout(() => {
+        form.style.display = 'none';
+        overlay.style.display = 'none';
+    }, 300);
+}
+
+export function popupForm() {
+    const form = createForm();
+    const overlay = createOverlay();
+    const content = document.getElementById('content');
+    const addTaskBtn = document.getElementById('addTaskBtn');
+
+    // Event listeners for showing and hiding the form
+    addTaskBtn.addEventListener('click', () => showForm(form, overlay));
+    form.querySelector('button').addEventListener('click', (event) => {
+        event.preventDefault();
+        hideForm(form, overlay);
+    });
+
+    content.append(form, overlay);
 }
