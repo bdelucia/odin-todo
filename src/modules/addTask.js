@@ -88,7 +88,7 @@ function getFormValues(form){
 
     if (taskTitle === null) {
         alert('Please give your task a title.');
-        return false;  // Return false if the title is empty
+        return false;  
     }
 
     return { 
@@ -99,7 +99,7 @@ function getFormValues(form){
     };
 }
 
-function createTask(title, desc, dueDate, priority){
+export function createTask(title, desc, dueDate, priority){
     return {
         title: title,
         desc: desc,
