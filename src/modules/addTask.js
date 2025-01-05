@@ -35,7 +35,7 @@ function createPrioritySelect() {
 }
 
 // creates a form with task fields to fill out
-export function createForm() {
+export function createTaskForm() {
     const form = createElement('form', { id: 'form' });
 
     const titleLabel = createLabel('title', 'Title: ');
@@ -63,7 +63,7 @@ function createOverlay() {
 }
 
 // changes form.style from 'none' so it displays itself
-function showForm(form, overlay) {
+export function showForm(form, overlay) {
     form.style.display = 'flex';
     form.style.flexDirection = 'column';
     overlay.style.display = 'block';
@@ -72,7 +72,7 @@ function showForm(form, overlay) {
     }, 10);
 }
 
-function hideForm(form, overlay) {
+export function hideForm(form, overlay) {
     form.style.opacity = '0';
     setTimeout(() => {
         form.style.display = 'none';
@@ -120,7 +120,7 @@ function addTaskToList(task){
 }
 
 export function addTaskFormHandler() {
-    const form = createForm();
+    const form = createTaskForm();
     const overlay = createOverlay();
     const content = document.getElementById('content');
     const addTaskBtn = document.getElementById('addTaskBtn');
