@@ -5,7 +5,7 @@ export function renderSidebar() {
     sidebar.innerHTML = ""; 
 
     // Render each project as a button
-    projects.forEach((project, index) => {
+    projects.forEach((project) => {
         const button = document.createElement("button");
         button.textContent = project.name;
         button.addEventListener("click", () => {

@@ -1,4 +1,6 @@
 import { createOverlay, showForm, hideForm, createElement, createInput, createLabel } from "./addTask";
+import { renderSidebar } from "./sidebar";
+import { renderTasks } from "./content";
 export let projects = [];
 export let selectedProject = null;
 function Project(id, name) {
@@ -55,7 +57,8 @@ export function addProjectFormHandler(){
     // Event listeners for showing and hiding the form
     addProjectBtn.addEventListener('click', () => showForm(form, overlay));
     projectFormSubmitBtn.addEventListener('click', (event) => {
-        addProject()
+        renderSidebar();
+        renderTasks();
     });
 
     // appends the overlay with the form to content, by default its invisible
