@@ -1,5 +1,4 @@
 // creates an element of type, with optional attributes as an object
-let taskList = [];
 function createElement(type, attributes = {}) {
     const element = document.createElement(type);
     Object.keys(attributes).forEach(key => {
@@ -108,15 +107,11 @@ export function createTask(title, desc, dueDate, priority){
     }
 }
 
-function printTaskList(){
-    console.log("Tasks list: ");
-    taskList.forEach(task => {
+function printTaskList(project){
+    console.log(`Tasks for project: ${project.name}`);
+    project.tasks.forEach(task => {
         console.log(task);
     })
-}
-
-function addTaskToList(task){
-    taskList.push(task);
 }
 
 export function addTaskFormHandler() {

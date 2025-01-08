@@ -1,6 +1,5 @@
-import { showForm, hideForm } from "./addTask";
 let projects = [];
-
+let selectedProject = null;
 function Project(id, name) {
     return {
         id, 
