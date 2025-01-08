@@ -57,7 +57,7 @@ export function createTaskForm() {
     return form;
 }
 
-function createOverlay() {
+export function createOverlay() {
     return createElement('div', { id: 'popup-overlay' });
 }
 

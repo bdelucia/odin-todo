@@ -1,5 +1,6 @@
-let projects = [];
-let selectedProject = null;
+import { createOverlay, showForm, hideForm } from "./addTask";
+export let projects = [];
+export let selectedProject = null;
 function Project(id, name) {
     return {
         id, 
