@@ -1,4 +1,4 @@
-import { createOverlay, showForm, hideForm } from "./addTask";
+import { createOverlay, showForm, hideForm, createElement, createInput, createLabel } from "./addTask";
 export let projects = [];
 export let selectedProject = null;
 function Project(id, name) {
@@ -16,16 +16,16 @@ function addProjectToSidebar(projectName){
     projectsSidebarContainer.appendChild(projectButton);
 }
 
-function addProjectForm(){
+function createProjectForm(){
     const form = createElement('form', { id: 'projectForm' });
 
     const projectLabel = createLabel('projectName', 'Project name: ');
     const projectInput = createInput('projectName', 'text', `Enter your project's name`, true); // title is required
 
-    const projectSubmitButton = createElement('button', { type: 'submit' });
-    projectSubmitButton.textContent = 'Submit';
+    const projectSubmitBtn = createElement('button', { type: 'submit', id: 'projectSubmitBtn' });
+    projectSubmitBtn.textContent = 'Submit';
 
-    form.append(projectLabel, projectInput, submitButton);
+    form.append(projectLabel, projectInput, projectSubmitBtn);
 
     return form;
 }
@@ -43,6 +43,23 @@ export function addTasktoProject(projectName, task){
     } else {
         alert(`Project not found, couldn't add task.`);
     }
+}
+
+export function addProjectFormHandler(){
+    const form = createProjectForm();
+    const overlay = createOverlay();
+    const content = document.getElementById('content');
+    const addProjectBtn = document.getElementById('addProjectBtn');
+    const projectFormSubmitBtn = form.querySelector('#projectSubmitBtn');
+
+    // Event listeners for showing and hiding the form
+    addProjectBtn.addEventListener('click', () => showForm(form, overlay));
+    projectFormSubmitBtn.addEventListener('click', (event) => {
+        addProject()
+    });
+
+    // appends the overlay with the form to content, by default its invisible
+    content.append(form, overlay);
 }
 
 export function printProjects() {

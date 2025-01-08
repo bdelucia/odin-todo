@@ -1,5 +1,5 @@
 // creates an element of type, with optional attributes as an object
-function createElement(type, attributes = {}) {
+export function createElement(type, attributes = {}) {
     const element = document.createElement(type);
     Object.keys(attributes).forEach(key => {
         element.setAttribute(key, attributes[key]);
@@ -8,14 +8,14 @@ function createElement(type, attributes = {}) {
 }
 
 // creates an input
-function createInput(id, type, placeholder, required = false){
+export function createInput(id, type, placeholder, required = false){
     const input = createElement('input', { id, name: id, type, placeholder });
     if(required) input.required = 'true';
     return input;
 }
 
 // creates label partner element for an element, used in createForm() with createInput() to make input-label pairs
-function createLabel(forElement, textContent) {
+export function createLabel(forElement, textContent) {
     const label = createElement('label', { for: forElement });
     label.textContent = textContent;
     return label;

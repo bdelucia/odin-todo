@@ -65,7 +65,7 @@ input[required]:valid {
   margin-top: 1rem;
 }
 
-#form {
+#form, #projectForm {
   display: none;
   position: fixed;
   gap: 10px;
