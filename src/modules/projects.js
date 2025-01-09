@@ -3,6 +3,10 @@ import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
 export let projects = [];
 export let selectedProject = null;
+
+export function setSelectedProject(projectName){
+    selectedProject = projectName;
+}
 function Project(id, name) {
     return {
         id, 
@@ -47,6 +51,11 @@ export function addTasktoProject(projectName, task){
     }
 }
 
+function getProjectName(form){
+    const projectName = form.querySelector('#projectName');
+    return projectName.value;
+}
+
 export function addProjectFormHandler(){
     const form = createProjectForm();
     const overlay = createOverlay();
@@ -57,8 +66,11 @@ export function addProjectFormHandler(){
     // Event listeners for showing and hiding the form
     addProjectBtn.addEventListener('click', () => showForm(form, overlay));
     projectFormSubmitBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        addProject(getProjectName(form));
         renderSidebar();
-        renderTasks();
+        hideForm(form, overlay);
+        //renderTasks();
     });
 
     // appends the overlay with the form to content, by default its invisible

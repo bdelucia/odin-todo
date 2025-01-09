@@ -1,3 +1,4 @@
+import { projects, selectedProject } from "./projects.js";
 export function renderTasks() {
     const content = document.getElementById("content");
     content.innerHTML = "";
@@ -5,14 +6,14 @@ export function renderTasks() {
     if (selectedProject) {
         const title = document.createElement("h3");
         title.textContent = `Tasks for project: ${selectedProject.name}`;
-        taskList.appendChild(title);
+        //taskList.appendChild(title);
 
         selectedProject.tasks.forEach(task => {
             const taskItem = document.createElement("div");
             taskItem.textContent = task;
-            taskList.appendChild(taskItem);
+            //taskList.appendChild(taskItem);
         });
     } else {
-        taskList.textContent = "No project selected.";
+        //taskList.textContent = "No project selected.";
     }
 }
