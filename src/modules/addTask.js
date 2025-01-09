@@ -70,6 +70,7 @@ export function showForm(form, overlay) {
     overlay.style.display = 'block';
     setTimeout(() => {
         form.style.opacity = '1';
+        overlay.style.opacity = '1';
     }, 10);
 }
 
