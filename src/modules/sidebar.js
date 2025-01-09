@@ -12,7 +12,7 @@ export function renderSidebar() {
         button.textContent = project.name;
         button.addEventListener("click", () => {
             setSelectedProject(project.name);
-            //renderTasks(); 
+            renderTasks(); 
         });
         sidebar.appendChild(button);
     });

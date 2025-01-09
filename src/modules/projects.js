@@ -76,7 +76,7 @@ export function addProjectFormHandler(){
         renderSidebar();
         hideForm(form, overlay);
         printProjects();
-        //renderTasks();
+        renderTasks();
     });
 
     // appends the overlay with the form to content, by default its invisible
