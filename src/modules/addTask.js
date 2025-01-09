@@ -134,7 +134,7 @@ export function addTaskFormHandler() {
             hideForm(form, overlay);
             addTasktoProject(selectedProject, createTask(taskTitle, taskDesc, taskDueDate, taskPriority));
             printTaskList(getProject(selectedProject));
-            //renderTasks();
+            renderTasks();
         }
     });
 
