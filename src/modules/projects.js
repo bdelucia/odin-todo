@@ -1,8 +1,8 @@
 import { createOverlay, showForm, hideForm, createElement, createInput, createLabel } from "./addTask";
 import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
-export let projects = [Project(1, 'Default Project')];
-export let selectedProject = 'Default Project';
+export let projects = [];
+export let selectedProject = null;
 
 export function setSelectedProject(projectName){
     selectedProject = projectName;
@@ -16,12 +16,7 @@ function Project(id, name) {
 }
 
 export function getProject(projectName){
-    projects.forEach(project => {
-        if(project.name === projectName){
-            return project;
-        }
-    })
-    return false;
+    return projects.find(project => project.name === projectName) || false;
 }
 
 function addProjectToSidebar(projectName){
@@ -48,11 +43,12 @@ function createProjectForm(){
 export function addProject(name){
     const newProject = Project(projects.length+1, name);
     addProjectToSidebar(name);
+    setSelectedProject(name);
     projects.push(newProject);
 }
 
 export function addTasktoProject(projectName, task){
-    const project = projects.find(p => p.id === projectName);
+    const project = getProject(projectName);
     if(project) {
         project.tasks.push(task);
     } else {
