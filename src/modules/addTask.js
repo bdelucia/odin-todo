@@ -1,3 +1,4 @@
+import { projects, selectedProject, setSelectedProject, addTasktoProject, getProject } from "./projects.js";
 // creates an element of type, with optional attributes as an object
 export function createElement(type, attributes = {}) {
     const element = document.createElement(type);
@@ -114,6 +115,7 @@ function printTaskList(project){
     })
 }
 
+
 export function addTaskFormHandler() {
     const form = createTaskForm();
     const overlay = createOverlay();
@@ -129,8 +131,8 @@ export function addTaskFormHandler() {
         if(taskTitle !== "" || taskTitle.trim()){
             event.preventDefault();
             hideForm(form, overlay);
-            addTaskToList(createTask(taskTitle, taskDesc, taskDueDate, taskPriority))
-            printTaskList();
+            addTasktoProject(selectedProject, createTask(taskTitle, taskDesc, taskDueDate, taskPriority))
+            printTaskList(selectedProject);
         }
     });
 
