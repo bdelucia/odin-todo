@@ -1,71 +1,66 @@
 import { getProject, projects, selectedProject } from "./projects.js";
 import { createElement } from "./addTask.js";
 
-function createTaskElements(taskTitle, taskDesc, taskDueDate, taskPriority){
-    const title = createElement('div', { id: 'taskItemTitle' });
-    const desc = createElement('div', { id: 'taskItemDesc' });
-    const dueDate = createElement('div', { id: 'taskItemDueDate' });
-    const priority = createElement('div', { id: 'taskItemPriority' });
+// Create task elements and populate content
+function createTaskItem(task) {
+    const taskItem = createElement('div', { class: 'taskItem' });
 
-    return { title, desc, dueDate, priority };
+    const elements = [
+        { id: 'taskItemTitle', label: 'Title', value: task.title },
+        { id: 'taskItemDesc', label: 'Description', value: task.desc },
+        { id: 'taskItemDueDate', label: 'Due Date', value: task.dueDate },
+        { id: 'taskItemPriority', label: 'Priority', value: task.priority },
+    ];
+
+    elements.forEach(({ id, label, value }) => {
+        const element = createElement('div', { id });
+        element.textContent = `${label}: ${value}`;
+        taskItem.appendChild(element);
+    });
+
+    return taskItem;
 }
 
-
-
+// Render tasks for a specific project
 export function renderTasks() {
     const tasksContainer = document.getElementById("tasksContainer");
     const content = document.getElementById('content');
     const existingh3 = content.querySelector('h3');
-    content.removeChild(existingh3);
+    if (existingh3) content.removeChild(existingh3);
     tasksContainer.innerHTML = "";
-    const projectToShow = getProject(selectedProject);
 
     if (selectedProject) {
-        console.log('Creating DOM elements for tasks');
+        const projectToShow = getProject(selectedProject);
+
         const newh3 = createElement('h3');
         newh3.textContent = `Tasks for project: ${selectedProject}`;
         content.insertBefore(newh3, content.firstChild);
 
         projectToShow.tasks.forEach(task => {
-            const taskItem = createElement('div', {class: 'taskItem'});
-            const { title, desc, dueDate, priority } = createTaskElements(task.title, task.desc, task.dueDate, task.priority);
-
-            title.textContent = `Title: ${task.title}`;
-            desc.textContent = `Description: ${task.desc}`;
-            dueDate.textContent = `Due Date: ${task.dueDate}`;
-            priority.textContent = `Priority: ${task.priority}`;
-
-            taskItem.appendChild(title);
-            taskItem.appendChild(desc);
-            taskItem.appendChild(dueDate);
-            taskItem.appendChild(priority);
-
+            const taskItem = createTaskItem(task);
             tasksContainer.appendChild(taskItem);
         });
     } else {
-        alert('no project selected. somehow')
+        alert('No project selected. Please select a project.');
     }
 }
 
-export function renderAllTasks(){
+// Render all tasks across all projects
+export function renderAllTasks() {
     const tasksContainer = document.getElementById("tasksContainer");
+    const content = document.getElementById('content');
+    const existingh3 = content.querySelector('h3');
+    if (existingh3) content.removeChild(existingh3);
     tasksContainer.innerHTML = "";
+
+    const newh3 = createElement('h3');
+    newh3.textContent = `All tasks`;
+    content.insertBefore(newh3, content.firstChild);
+
     projects.forEach(project => {
         project.tasks.forEach(task => {
-            const taskItem = createElement('div', {class: 'taskItem'});
-            const { title, desc, dueDate, priority } = createTaskElements(task.title, task.desc, task.dueDate, task.priority);
-
-            title.textContent = `Title: ${task.title}`;
-            desc.textContent = `Description: ${task.desc}`;
-            dueDate.textContent = `Due Date: ${task.dueDate}`;
-            priority.textContent = `Priority: ${task.priority}`;
-
-            taskItem.appendChild(title);
-            taskItem.appendChild(desc);
-            taskItem.appendChild(dueDate);
-            taskItem.appendChild(priority);
-
+            const taskItem = createTaskItem(task);
             tasksContainer.appendChild(taskItem);
-        })
-    })
+        });
+    });
 }
