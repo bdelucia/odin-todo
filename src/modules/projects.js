@@ -30,7 +30,7 @@ function addProjectToSidebar(projectName){
 function createProjectForm(){
     const form = createElement('form', { id: 'projectForm' });
 
-    const closeBtn = createElement('img', { src: closeButtonSVG, id: 'close-button' })
+    const closeBtn = createElement('img', { src: closeButtonSVG, id: 'close-button' });
 
     const projectLabel = createLabel('projectName', 'Project name: ');
     const projectInput = createInput('projectName', 'text', `Enter your project's name`, true); // title is required

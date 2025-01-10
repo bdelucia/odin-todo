@@ -1,5 +1,7 @@
 import { projects, selectedProject, setSelectedProject, addTasktoProject, getProject } from "./projects.js";
 import { renderTasks } from "./content.js";
+import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
+
 // creates an element of type, with optional attributes as an object
 export function createElement(type, attributes = {}) {
     const element = document.createElement(type);
@@ -39,6 +41,8 @@ function createPrioritySelect() {
 export function createTaskForm() {
     const form = createElement('form', { id: 'form' });
 
+    const closeBtn = createElement('img', { src: closeButtonSVG, id: 'close-button' });
+
     const titleLabel = createLabel('title', 'Title: ');
     const titleInput = createInput('title', 'text', 'Enter a title', true); // title is required
 
@@ -54,7 +58,7 @@ export function createTaskForm() {
     const submitButton = createElement('button', { type: 'submit' });
     submitButton.textContent = 'Submit';
 
-    form.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, prioritySelect, submitButton);
+    form.append(closeBtn, titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, prioritySelect, submitButton);
 
     return form;
 }
@@ -121,9 +125,16 @@ function printTaskList(project){
 export function addTaskFormHandler() {
     const form = createTaskForm();
     const overlay = createOverlay();
+
     const content = document.getElementById('content');
     const addTaskBtn = document.getElementById('addTaskBtn');
+
     const formSubmitBtn = form.querySelector('button');
+    const closeBtn = form.querySelector('#close-button');
+    const taskTitle = form.querySelector('#title');
+    const taskDesc = form.querySelector('#desc');
+    const taskDueDate = form.querySelector('#dueDate');
+    const taskPriority = form.querySelector('#priority');
 
     // Event listeners for showing and hiding the form
     addTaskBtn.addEventListener('click', () => showForm(form, overlay));
@@ -133,10 +144,21 @@ export function addTaskFormHandler() {
         if(taskTitle !== "" || taskTitle.trim()){
             event.preventDefault();
             hideForm(form, overlay);
+            taskTitle.value = "";
+            taskDesc.value = "";
+            taskDueDate.value = "";
+            taskPriority.value = "none";
             addTasktoProject(selectedProject, createTask(taskTitle, taskDesc, taskDueDate, taskPriority));
             printTaskList(getProject(selectedProject));
             renderTasks();
         }
+    });
+    closeBtn.addEventListener('click', () => {
+        hideForm(form, overlay);
+        taskTitle.value = "";
+        taskDesc.value = "";
+        taskDueDate.value = "";
+        taskPriority.value = "none";
     });
 
     // appends the overlay with the form to content, by default its invisible
