@@ -1,4 +1,4 @@
-import { renderTasks } from "./content";
+import { renderTasks, renderAllTasks} from "./content";
 import { projects, selectedProject, setSelectedProject } from "./projects.js";
 
 export function renderSidebar() {
@@ -16,4 +16,11 @@ export function renderSidebar() {
         });
         sidebar.appendChild(button);
     });
+}
+
+export function sidebarButtonsHandler(){
+    const allTasksBtn = document.getElementById('allTasksBtn');
+    allTasksBtn.addEventListener("click", () => {
+        renderAllTasks();
+    })
 }

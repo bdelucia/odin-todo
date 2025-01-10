@@ -10,6 +10,8 @@ function createTaskElements(taskTitle, taskDesc, taskDueDate, taskPriority){
     return { title, desc, dueDate, priority };
 }
 
+
+
 export function renderTasks() {
     const tasksContainer = document.getElementById("tasksContainer");
     const content = document.getElementById('content');
@@ -46,9 +48,24 @@ export function renderTasks() {
 }
 
 export function renderAllTasks(){
+    const tasksContainer = document.getElementById("tasksContainer");
+    tasksContainer.innerHTML = "";
     projects.forEach(project => {
         project.tasks.forEach(task => {
-            
+            const taskItem = createElement('div', {class: 'taskItem'});
+            const { title, desc, dueDate, priority } = createTaskElements(task.title, task.desc, task.dueDate, task.priority);
+
+            title.textContent = `Title: ${task.title}`;
+            desc.textContent = `Description: ${task.desc}`;
+            dueDate.textContent = `Due Date: ${task.dueDate}`;
+            priority.textContent = `Priority: ${task.priority}`;
+
+            taskItem.appendChild(title);
+            taskItem.appendChild(desc);
+            taskItem.appendChild(dueDate);
+            taskItem.appendChild(priority);
+
+            tasksContainer.appendChild(taskItem);
         })
     })
 }
