@@ -1,5 +1,15 @@
 import { getProject, projects, selectedProject } from "./projects.js";
 import { createElement } from "./addTask.js";
+
+function createTaskElements(taskTitle, taskDesc, taskDueDate, taskPriority){
+    const title = createElement('div', { id: 'taskItemTitle' });
+    const desc = createElement('div', { id: 'taskItemDesc' });
+    const dueDate = createElement('div', { id: 'taskItemDueDate' });
+    const priority = createElement('div', { id: 'taskItemPriority' });
+
+    return { title, desc, dueDate, priority };
+}
+
 export function renderTasks() {
     const tasksContainer = document.getElementById("tasksContainer");
     const content = document.getElementById('content');
@@ -16,10 +26,29 @@ export function renderTasks() {
 
         projectToShow.tasks.forEach(task => {
             const taskItem = createElement('div', {class: 'taskItem'});
-            taskItem.textContent = task.title;
+            const { title, desc, dueDate, priority } = createTaskElements(task.title, task.desc, task.dueDate, task.priority);
+
+            title.textContent = `Title: ${task.title}`;
+            desc.textContent = `Description: ${task.desc}`;
+            dueDate.textContent = `Due Date: ${task.dueDate}`;
+            priority.textContent = `Priority: ${task.priority}`;
+
+            taskItem.appendChild(title);
+            taskItem.appendChild(desc);
+            taskItem.appendChild(dueDate);
+            taskItem.appendChild(priority);
+
             tasksContainer.appendChild(taskItem);
         });
     } else {
         alert('no project selected. somehow')
     }
+}
+
+export function renderAllTasks(){
+    projects.forEach(project => {
+        project.tasks.forEach(task => {
+            
+        })
+    })
 }
