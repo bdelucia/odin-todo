@@ -1,6 +1,7 @@
 import { createOverlay, showForm, hideForm, createElement, createInput, createLabel } from "./addTask";
 import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
+import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
 export let projects = [];
 export let selectedProject = null;
 
@@ -29,13 +30,15 @@ function addProjectToSidebar(projectName){
 function createProjectForm(){
     const form = createElement('form', { id: 'projectForm' });
 
+    const closeBtn = createElement('img', { src: closeButtonSVG, id: 'close-button' })
+
     const projectLabel = createLabel('projectName', 'Project name: ');
     const projectInput = createInput('projectName', 'text', `Enter your project's name`, true); // title is required
 
     const projectSubmitBtn = createElement('button', { type: 'submit', id: 'projectSubmitBtn' });
     projectSubmitBtn.textContent = 'Submit';
 
-    form.append(projectLabel, projectInput, projectSubmitBtn);
+    form.append(closeBtn, projectLabel, projectInput, projectSubmitBtn);
 
     return form;
 }
@@ -64,9 +67,13 @@ function getProjectName(form){
 export function addProjectFormHandler(){
     const form = createProjectForm();
     const overlay = createOverlay();
+
     const content = document.getElementById('content');
     const addProjectBtn = document.getElementById('addProjectBtn');
+
     const projectFormSubmitBtn = form.querySelector('#projectSubmitBtn');
+    const closeBtn = form.querySelector('#close-button');
+    const projectInput = form.querySelector('#projectName');
 
     // Event listeners for showing and hiding the form
     addProjectBtn.addEventListener('click', () => showForm(form, overlay));
@@ -75,8 +82,13 @@ export function addProjectFormHandler(){
         addProject(getProjectName(form));
         renderSidebar();
         hideForm(form, overlay);
+        projectInput.value = "";
         printProjects();
         renderTasks();
+    });
+    closeBtn.addEventListener('click', () => {
+        hideForm(form, overlay);
+        projectInput.value = "";
     });
 
     // appends the overlay with the form to content, by default its invisible

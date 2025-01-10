@@ -21,7 +21,6 @@ function createTaskItem(task) {
     return taskItem;
 }
 
-// Render tasks for a specific project
 export function renderTasks() {
     const tasksContainer = document.getElementById("tasksContainer");
     const content = document.getElementById('content');
@@ -45,7 +44,6 @@ export function renderTasks() {
     }
 }
 
-// Render all tasks across all projects
 export function renderAllTasks() {
     const tasksContainer = document.getElementById("tasksContainer");
     const content = document.getElementById('content');
