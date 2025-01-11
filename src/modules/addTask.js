@@ -106,6 +106,7 @@ export function createTask(title, desc, dueDate, priority){
         desc: desc,
         dueDate: dueDate,
         priority: priority,
+        projectName: selectedProject
     }
 }
 

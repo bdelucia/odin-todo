@@ -63,6 +63,9 @@ input[required]:valid {
   cursor: pointer;
 }
 
+#projectTitle{
+  font-weight: bold;
+}
 
 #sidebar {
   display: flex;

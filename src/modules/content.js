@@ -4,8 +4,10 @@ import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
 // Create task elements and populate content
 function createTaskItem(task) {
     const taskItem = createElement('div', { class: 'taskItem' });
-    const deleteTaskBtn = createElement('img', { src: deleteButtonSVG, id: 'delete-button' });
-    taskItem.appendChild(deleteTaskBtn);
+
+    const projectTitle = createElement('text', { id: 'projectTitle' });
+    projectTitle.textContent = task.projectName;
+    taskItem.appendChild(projectTitle);
 
     const elements = [
         { id: 'taskItemTitle', label: 'Title', value: task.title },
@@ -19,6 +21,9 @@ function createTaskItem(task) {
         element.textContent = `${label}: ${value}`;
         taskItem.appendChild(element);
     });
+
+    const deleteTaskBtn = createElement('img', { src: deleteButtonSVG, id: 'delete-button' });
+    taskItem.appendChild(deleteTaskBtn);
 
     return taskItem;
 }
