@@ -131,34 +131,44 @@ export function addTaskFormHandler() {
 
     const formSubmitBtn = form.querySelector('button');
     const closeBtn = form.querySelector('#close-button');
-    const taskTitle = form.querySelector('#title');
-    const taskDesc = form.querySelector('#desc');
-    const taskDueDate = form.querySelector('#dueDate');
-    const taskPriority = form.querySelector('#priority');
 
-    // Event listeners for showing and hiding the form
     addTaskBtn.addEventListener('click', () => showForm(form, overlay));
     formSubmitBtn.addEventListener('click', (event) => {
-        const { taskTitle, taskDesc, taskDueDate, taskPriority } = getFormValues(form);
-
-        if(taskTitle !== "" || taskTitle.trim()){
+        const formValues = getFormValues(form);
+    
+        if (formValues && formValues.taskTitle.trim() !== "") {
             event.preventDefault();
             hideForm(form, overlay);
-            taskTitle.value = "";
-            taskDesc.value = "";
-            taskDueDate.value = "";
-            taskPriority.value = "none";
-            addTasktoProject(selectedProject, createTask(taskTitle, taskDesc, taskDueDate, taskPriority));
+    
+            form.querySelector('#title').value = "";
+            form.querySelector('#desc').value = "";
+            form.querySelector('#dueDate').value = "";
+            form.querySelector('#priority').value = "none";
+    
+            addTasktoProject(
+                selectedProject,
+                createTask(
+                    formValues.taskTitle,
+                    formValues.taskDesc,
+                    formValues.taskDueDate,
+                    formValues.taskPriority
+                )
+            );
             printTaskList(getProject(selectedProject));
             renderTasks();
+        } else {
+            alert("Task title is required.");
         }
     });
+    
     closeBtn.addEventListener('click', () => {
         hideForm(form, overlay);
-        taskTitle.value = "";
-        taskDesc.value = "";
-        taskDueDate.value = "";
-        taskPriority.value = "none";
+    
+        // Clear input fields by directly accessing DOM elements
+        form.querySelector('#title').value = "";
+        form.querySelector('#desc').value = "";
+        form.querySelector('#dueDate').value = "";
+        form.querySelector('#priority').value = "none";
     });
 
     // appends the overlay with the form to content, by default its invisible
