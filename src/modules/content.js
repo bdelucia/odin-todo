@@ -1,9 +1,11 @@
 import { getProject, projects, selectedProject } from "./projects.js";
 import { createElement } from "./addTask.js";
-
+import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
 // Create task elements and populate content
 function createTaskItem(task) {
     const taskItem = createElement('div', { class: 'taskItem' });
+    const deleteTaskBtn = createElement('img', { src: deleteButtonSVG, id: 'delete-button' });
+    taskItem.appendChild(deleteTaskBtn);
 
     const elements = [
         { id: 'taskItemTitle', label: 'Title', value: task.title },

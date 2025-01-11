@@ -92,11 +92,6 @@ function getFormValues(form){
     const taskDueDate = form.querySelector('#dueDate');
     const taskPriority = form.querySelector('#priority');
 
-    if (taskTitle === null) {
-        alert('Please give your task a title.');
-        return false;  
-    }
-
     return { 
         taskTitle: taskTitle.value,
         taskDesc: taskDesc.value,
@@ -156,15 +151,12 @@ export function addTaskFormHandler() {
             );
             printTaskList(getProject(selectedProject));
             renderTasks();
-        } else {
-            alert("Task title is required.");
         }
     });
     
     closeBtn.addEventListener('click', () => {
         hideForm(form, overlay);
     
-        // Clear input fields by directly accessing DOM elements
         form.querySelector('#title').value = "";
         form.querySelector('#desc').value = "";
         form.querySelector('#dueDate').value = "";

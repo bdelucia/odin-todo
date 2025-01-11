@@ -50,12 +50,17 @@ export function addProject(name){
     projects.push(newProject);
 }
 
-export function addTasktoProject(projectName, task){
+export function addTasktoProject(projectName, task) {
     const project = getProject(projectName);
-    if(project) {
-        project.tasks.push(task);
-    } else {
-        alert(`Project not found, couldn't add task.`);
+    if (project) {
+        // Check if a task with the same title already exists
+        const duplicateTask = project.tasks.find(existingTask => existingTask.title === task.title);
+        if (duplicateTask) {
+            alert(`A task with the name "${task.title}" already exists in the project "${projectName}".`);
+        } else {
+            project.tasks.push(task);
+            alert(`Task "${task.title}" added successfully to project "${projectName}".`);
+        }
     }
 }
 

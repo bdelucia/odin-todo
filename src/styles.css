@@ -55,13 +55,14 @@ input[required]:valid {
   background-color: var(--text-color);
 }
 
-#close-button {
+#close-button, #delete-button {
   display: flex;
   height: 25px;
   width: auto;
   margin-left: auto;
   cursor: pointer;
 }
+
 
 #sidebar {
   display: flex;
