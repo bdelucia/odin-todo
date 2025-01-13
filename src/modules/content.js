@@ -1,6 +1,7 @@
 import { getProject, projects, selectedProject } from "./projects.js";
 import { createElement } from "./addTask.js";
 import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
+import { getTasksDueToday } from "./dates.js";
 // Create task elements and populate content
 function createTaskItem(task, id) {
     const taskItem = createElement('div', { class: 'taskItem' });
@@ -73,6 +74,26 @@ export function renderAllTasks() {
             const taskItem = createTaskItem(task, taskId);
             tasksContainer.appendChild(taskItem);
         });
+    });
+}
+
+export function renderTasksDueToday(){
+    const tasksContainer = document.getElementById("tasksContainer");
+    const content = document.getElementById('content');
+    const existingh3 = content.querySelector('h3');
+    if (existingh3) content.removeChild(existingh3);
+    tasksContainer.innerHTML = "";
+
+    const newh3 = createElement('h3');
+    newh3.textContent = `Tasks due today`;
+    content.insertBefore(newh3, content.firstChild);
+
+    const tasksDueToday = getTasksDueToday();
+
+    tasksDueToday.forEach((task, index) => {
+        const taskId = `${task.projectName}-${index}`;
+        const taskItem = createTaskItem(task, taskId);
+        tasksContainer.appendChild(taskItem);
     });
 }
 
