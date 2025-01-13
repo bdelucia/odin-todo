@@ -1,4 +1,4 @@
-import { renderTasks, renderAllTasks, renderTasksDueToday} from "./content";
+import { renderTasks, renderAllTasks, renderTasksDueToday, renderTasksDueThisWeek} from "./content";
 import { projects, selectedProject, setSelectedProject } from "./projects.js";
 import { toggleAddTaskButton } from "./addTask.js";
 export function renderSidebar() {
@@ -22,6 +22,8 @@ export function renderSidebar() {
 export function sidebarButtonsHandler(){
     const allTasksBtn = document.getElementById('allTasksBtn');
     const tasksTodayBtn = document.getElementById('todayBtn');
+    const tasksWeekBtn = document.getElementById('thisWeekBtn');
+
     allTasksBtn.addEventListener("click", () => {
         setSelectedProject(null);
         renderAllTasks();
@@ -29,5 +31,9 @@ export function sidebarButtonsHandler(){
     tasksTodayBtn.addEventListener('click', () => {
         setSelectedProject(null);
         renderTasksDueToday();
-    })
+    });
+    tasksWeekBtn.addEventListener('click', () => {
+        setSelectedProject(null);
+        renderTasksDueThisWeek();
+    });
 }
