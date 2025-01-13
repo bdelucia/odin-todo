@@ -21,6 +21,7 @@ export function renderSidebar() {
 export function sidebarButtonsHandler(){
     const allTasksBtn = document.getElementById('allTasksBtn');
     allTasksBtn.addEventListener("click", () => {
+        setSelectedProject(null);
         renderAllTasks();
     })
 }

@@ -55,7 +55,7 @@ input[required]:valid {
   background-color: var(--text-color);
 }
 
-#close-button, #delete-button {
+#close-button, .delete-button {
   display: flex;
   height: 25px;
   width: auto;

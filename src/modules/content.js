@@ -2,8 +2,9 @@ import { getProject, projects, selectedProject } from "./projects.js";
 import { createElement } from "./addTask.js";
 import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
 // Create task elements and populate content
-function createTaskItem(task) {
+function createTaskItem(task, id) {
     const taskItem = createElement('div', { class: 'taskItem' });
+    taskItem.dataset.id = id;
 
     const projectTitle = createElement('text', { id: 'projectTitle' });
     projectTitle.textContent = task.projectName;
@@ -22,7 +23,10 @@ function createTaskItem(task) {
         taskItem.appendChild(element);
     });
 
-    const deleteTaskBtn = createElement('img', { src: deleteButtonSVG, id: 'delete-button' });
+    const deleteTaskBtn = createElement('img', { src: deleteButtonSVG, class: 'delete-button' });
+    deleteTaskBtn.addEventListener('click', () => {
+        handleDeleteTask(id);
+    });
     taskItem.appendChild(deleteTaskBtn);
 
     return taskItem;
@@ -42,8 +46,9 @@ export function renderTasks() {
         newh3.textContent = `Tasks for project: ${selectedProject}`;
         content.insertBefore(newh3, content.firstChild);
 
-        projectToShow.tasks.forEach(task => {
-            const taskItem = createTaskItem(task);
+        projectToShow.tasks.forEach((task, index) => {
+            const taskId = `${selectedProject}-${index}`;
+            const taskItem = createTaskItem(task, taskId);
             tasksContainer.appendChild(taskItem);
         });
     } else {
@@ -63,9 +68,31 @@ export function renderAllTasks() {
     content.insertBefore(newh3, content.firstChild);
 
     projects.forEach(project => {
-        project.tasks.forEach(task => {
-            const taskItem = createTaskItem(task);
+        project.tasks.forEach((task, index) => {
+            const taskId = `${project.name}-${index}`;
+            const taskItem = createTaskItem(task, taskId);
             tasksContainer.appendChild(taskItem);
         });
     });
+}
+
+function handleDeleteTask(taskId){
+    const [projectName, taskIndex] = taskId.split('-');
+    const project = projects.find(proj => proj.name === projectName);
+
+    if(project){
+        project.tasks.splice(taskIndex, 1);
+    } else {
+        alert(`Project '${projectName}' not found`);
+    }
+
+    if (selectedProject) {
+        if (selectedProject === projectName) {
+            renderTasks(); // Re-render tasks for the selected project
+        } else {
+            console.log(`Selected project '${selectedProject}' does not match deleted task's project '${projectName}'.`);
+        }
+    } else {
+        renderAllTasks(); // Re-render all tasks if no project is selected
+    }
 }
