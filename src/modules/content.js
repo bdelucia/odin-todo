@@ -88,11 +88,11 @@ function handleDeleteTask(taskId){
 
     if (selectedProject) {
         if (selectedProject === projectName) {
-            renderTasks(); // Re-render tasks for the selected project
+            renderTasks();
         } else {
             console.log(`Selected project '${selectedProject}' does not match deleted task's project '${projectName}'.`);
         }
     } else {
-        renderAllTasks(); // Re-render all tasks if no project is selected
+        renderAllTasks();
     }
 }
