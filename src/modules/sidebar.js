@@ -24,12 +24,10 @@ export function sidebarButtonsHandler(){
     const tasksTodayBtn = document.getElementById('todayBtn');
     allTasksBtn.addEventListener("click", () => {
         setSelectedProject(null);
-        toggleAddTaskButton();
         renderAllTasks();
     });
     tasksTodayBtn.addEventListener('click', () => {
         setSelectedProject(null);
-        toggleAddTaskButton();
         renderTasksDueToday();
     })
 }

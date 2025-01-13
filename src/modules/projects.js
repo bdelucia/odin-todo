@@ -1,4 +1,4 @@
-import { createOverlay, showForm, hideForm, createElement, createInput, createLabel } from "./addTask";
+import { createOverlay, showForm, hideForm, createElement, createInput, createLabel, toggleAddTaskButton } from "./addTask";
 import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
 import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
@@ -7,6 +7,9 @@ export let selectedProject = null;
 
 export function setSelectedProject(projectName){
     selectedProject = projectName;
+    if(selectedProject === null){
+        toggleAddTaskButton();
+    }
 }
 function Project(id, name) {
     return {
