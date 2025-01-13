@@ -50,7 +50,7 @@ export function createTaskForm() {
     const descInput = createInput('desc', 'text', 'Enter a description');
 
     const dueDateLabel = createLabel('dueDate', 'Due date: ');
-    const dueDateInput = createInput('dueDate', 'date', 'Enter a due-date');
+    const dueDateInput = createInput('dueDate', 'date', 'Enter a due-date', true); // due date is required
 
     const priorityLabel = createLabel('priority', 'Priority: ');
     const prioritySelect = createPrioritySelect();
@@ -117,6 +117,16 @@ function printTaskList(project){
     })
 }
 
+export function toggleAddTaskButton() {
+    const addTaskBtn = document.getElementById("addTaskBtn");
+    if (selectedProject) {
+        addTaskBtn.disabled = false; // Enable the button
+        addTaskBtn.classList.remove("disabled"); // Optional: update styling
+    } else {
+        addTaskBtn.disabled = true; // Disable the button
+        addTaskBtn.classList.add("disabled"); // Optional: update styling
+    }
+}
 
 export function addTaskFormHandler() {
     const form = createTaskForm();
@@ -132,7 +142,7 @@ export function addTaskFormHandler() {
     formSubmitBtn.addEventListener('click', (event) => {
         const formValues = getFormValues(form);
     
-        if (formValues && formValues.taskTitle.trim() !== "") {
+        if (formValues && formValues.taskTitle.trim() !== "" && formValues.taskDueDate.trim() !== "") {
             event.preventDefault();
             hideForm(form, overlay);
     

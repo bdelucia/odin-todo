@@ -67,6 +67,12 @@ button:active {
   background-color: var(--primary-color); /* Even darker blue */
 }
 
+button:disabled {
+  background-color: #c0c0c0; /* Gray for disabled buttons */
+  color: #6c757d; /* Muted text */
+  cursor: not-allowed;
+  box-shadow: none; /* Remove shadow */
+}
 
 input[required]:invalid {
   border-color: red; 
