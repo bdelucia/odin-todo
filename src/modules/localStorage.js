@@ -1,6 +1,6 @@
 import { projects, Project } from "./projects";
 import { renderAllTasks } from "./content";
-import { toggleAddTaskButton } from "./addTask";
+import { toggleAddTaskButton, showForm, hideForm, createOverlay, createElement } from "./addTask";
 export function initializeProjects() {
     const storedProjects = localStorage.getItem('projects');
     if (!storedProjects || JSON.parse(storedProjects).length === 0) {
@@ -22,6 +22,43 @@ export function saveProjectsToStorage() {
     localStorage.setItem('projects', JSON.stringify(projects));
 }
 
-export function clearLocalStorage(){
+export function createConfirmationForm() {
+    // Create the overlay and form container
+    const overlay = createOverlay();
+    const form = createElement('form', { id: 'confirmation-form' });
+
+    // Create the description paragraph
+    const description = createElement('p');
+    description.textContent = 'This action will reset all projects and tasks. Are you sure you want to continue?';
     
+    // Create the continue button
+    const continueButton = createElement('button', {type: 'submit'});
+    continueButton.textContent = 'Continue';
+    continueButton.addEventListener('click', () => {
+        // Handle the action (resetting projects and tasks or other logic)
+        localStorage.clear();
+        hideForm(form, overlay); // Hide the form after confirmation
+    });
+
+    // Create the cancel button (optional, for user to cancel the action)
+    const cancelButton = createElement('button', {type: 'submit'});
+    cancelButton.textContent = 'Cancel';
+    cancelButton.addEventListener('click', () => {
+        hideForm(form, overlay); // Just hide the form without doing anything
+    });
+
+    // Append elements to the form
+    form.appendChild(description);
+    form.appendChild(continueButton);
+    form.appendChild(cancelButton);
+    
+    // Append the form and overlay to the body
+    document.body.appendChild(overlay);
+    document.body.appendChild(form);
+    
+    return form;
+}
+
+export function clearLocalStorage(){
+
 }

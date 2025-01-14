@@ -1,9 +1,10 @@
 import { renderTasks, renderAllTasks, renderTasksDueToday, renderTasksDueThisWeek, renderImportantTasks} from "./content";
 import { projects, setSelectedProject, removeProject } from "./projects.js";
-import { createElement, toggleAddTaskButton } from "./addTask.js";
+import { createElement, createOverlay, showForm, toggleAddTaskButton } from "./addTask.js";
 import deleteButtonSVG from '../assets/delete-svgrepo-com.svg';
 import clearStorageSVG from '../assets/nuclear-bomb-svgrepo-com.svg';
 import darkLightThemeSVG from '../assets/theme-light-dark(1).svg';
+import { createConfirmationForm } from "./localStorage.js";
 export function renderSidebar() {
     const projectsSidebarContainer = document.getElementById("projectsSidebarContainer");
     projectsSidebarContainer.innerHTML = ""; // Clear the sidebar before re-rendering
@@ -48,6 +49,9 @@ export function renderSidebar() {
         // Append the container to the sidebar
         projectsSidebarContainer.appendChild(projectContainer);
     });
+}
+
+export function renderWebsiteButtons(){
     const websiteButtonsContainer = createElement('div', { class: 'website-buttons-container'});
     const changeThemeBtn = createElement('img', {src: darkLightThemeSVG, class: 'dark-light-theme-button'});
     const clearStorageBtn = createElement('img', {src: clearStorageSVG, class: 'clear-storage-button'});
@@ -69,6 +73,12 @@ export function renderSidebar() {
             document.body.classList.add('dark-theme');
         }
     });
+
+    clearStorageBtn.addEventListener('click', () => {
+        const confirmForm = createConfirmationForm();
+        const overlay = createOverlay();
+        showForm(confirmForm, overlay);
+    })
 
     sidebar.appendChild(websiteButtonsContainer);
 }

@@ -37,6 +37,10 @@ body {
   color: var(--primary-color)
 }
 
+button[type="submit"]:hover {
+  color: var(--text-color);
+}
+
 h3 {
   margin-left: 1rem;
 }
@@ -259,7 +263,7 @@ select option:hover {
   opacity: 1;
 }
 
-#form, #projectForm {
+#form, #projectForm, #confirmation-form {
   display: none;
   position: fixed;
   gap: 7px;
