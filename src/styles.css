@@ -151,13 +151,13 @@ select option:hover {
 }
 
 /* Hover effect */
-.delete-button:hover {
-  transform: scale(1.1);         /* Slightly scale up the icon */
+.delete-button:hover, .delete-project-button:hover {
+  transform: scale(1.2);         /* Slightly scale up the icon */
   fill: #ff4d4d;                 /* Change color to red on hover */
 }
 
 /* Active state (when button is clicked) */
-.delete-button:active {
+.delete-button:active, .delete-project-button:active {
   transform: scale(0.95);        /* Scale down the icon to give a click effect */
   fill: #d43f3a;                 /* Darker red color when clicked */
 }
