@@ -1,5 +1,5 @@
 import { getProject, projects, selectedProject } from "./projects.js";
-import { createElement } from "./addTask.js";
+import { createElement, createTaskForm, showForm, hideForm, createOverlay, getFormValues } from "./addTask.js";
 import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
 import editButtonSVG from '../assets/edit-svgrepo-com.svg';
 import { getTasksDueToday, getTasksDueThisWeek } from "./dates.js";
@@ -173,5 +173,51 @@ function handleDeleteTask(taskId){
 }
 
 function handleEditTask(taskId){
+    const [projectName, taskIndex] = taskId.split('-');
+    const project = projects.find(proj => proj.name === projectName);
+    const task = project.tasks[taskIndex]; // Assuming tasks is an array
 
+    // Create form and populate with existing task values
+    const form = createTaskForm();
+
+    const titleInput = form.querySelector('#title');
+    const descInput = form.querySelector('#desc');
+    const dueDateInput = form.querySelector('#dueDate');
+    const prioritySelect = form.querySelector('#priority');
+
+    titleInput.value = task.title;
+    descInput.value = task.desc;
+    dueDateInput.value = task.dueDate;
+    prioritySelect.value = task.priority;
+
+    // Create overlay and show form
+    const overlay = createOverlay();
+    document.body.appendChild(overlay);
+    document.body.appendChild(form);
+    showForm(form, overlay);
+
+    // Handle form submission to update task
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent form submission
+
+        const updatedValues = getFormValues(form);
+        task.title = updatedValues.taskTitle;
+        task.desc = updatedValues.taskDesc;
+        task.dueDate = updatedValues.taskDueDate;
+        task.priority = updatedValues.taskPriority;
+
+        // You can update your project/task state here (e.g., rerender UI or save to backend)
+        hideForm(form, overlay);
+        if(selectedProject === null){
+            renderAllTasks()
+        } else {
+            renderTasks();
+        }
+    });
+
+    // Close button listener (optional)
+    const closeButton = form.querySelector('#close-button');
+    closeButton.addEventListener('click', () => {
+        hideForm(form, overlay);
+    });
 }

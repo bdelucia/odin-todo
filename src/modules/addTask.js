@@ -98,7 +98,7 @@ export function hideForm(form, overlay) {
     }, 300);
 }
 
-function getFormValues(form){
+export function getFormValues(form){
     const taskTitle = form.querySelector('#title');
     const taskDesc = form.querySelector('#desc');
     const taskDueDate = form.querySelector('#dueDate');
