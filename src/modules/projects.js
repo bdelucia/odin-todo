@@ -48,6 +48,12 @@ function createProjectForm(){
     const projectSubmitBtn = createElement('button', { type: 'submit', id: 'projectSubmitBtn' });
     projectSubmitBtn.textContent = 'Submit';
 
+    projectInput.addEventListener('input', () => {
+        if (projectInput.value.length > 25) {
+            projectInput.value = projectInput.value.slice(0, 25); // Trim input if it exceeds 25 characters
+        }
+    });
+
     form.append(closeBtn, projectLabel, projectInput, projectSubmitBtn);
 
     return form;

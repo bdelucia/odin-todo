@@ -58,6 +58,18 @@ export function createTaskForm() {
     const submitButton = createElement('button', { type: 'submit' });
     submitButton.textContent = 'Submit';
 
+    titleInput.addEventListener('input', () => {
+        if (titleInput.value.length > 25) {
+            titleInput.value = titleInput.value.slice(0, 25); // Trim input if it exceeds 25 characters
+        }
+    });
+
+    descInput.addEventListener('input', () => {
+        if (descInput.value.length > 75) {
+            descInput.value = descInput.value.slice(0, 75); // Trim input if it exceeds 75 characters
+        }
+    });
+
     form.append(closeBtn, titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, prioritySelect, submitButton);
 
     return form;
@@ -143,6 +155,14 @@ export function addTaskFormHandler() {
         const formValues = getFormValues(form);
     
         if (formValues && formValues.taskTitle.trim() !== "" && formValues.taskDueDate.trim() !== "") {
+            if (formValues.taskTitle.length > 25) {
+                alert("Task title must be 25 characters or less.");
+                return;
+            }
+            if (formValues.taskDesc.length > 75) {
+                alert("Task description must be 75 characters or less.");
+                return;
+            }
             event.preventDefault();
             hideForm(form, overlay);
     
