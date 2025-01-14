@@ -1,6 +1,6 @@
 import './styles.css'
 import { addProjectFormHandler, setSelectedProject, projects } from './modules/projects.js'
-import { addTaskFormHandler, createTaskForm } from './modules/addTask.js'
+import { addTaskFormHandler, createTaskForm, toggleAddTaskButton } from './modules/addTask.js'
 import { addProject, addTasktoProject,  printProjects} from './modules/projects.js';
 import { initializeProjects } from './modules/localStorage.js';
 import { sidebarButtonsHandler, renderSidebar } from './modules/sidebar.js';
