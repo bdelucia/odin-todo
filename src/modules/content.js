@@ -45,7 +45,7 @@ export function renderTasks() {
         const projectToShow = getProject(selectedProject);
 
         const newh3 = createElement('h3');
-        newh3.textContent = `Tasks for project: ${selectedProject}`;
+        newh3.textContent = `${selectedProject} Tasks`;
         content.insertBefore(newh3, content.firstChild);
 
         projectToShow.tasks.forEach((task, index) => {

@@ -1,6 +1,7 @@
 import { createOverlay, showForm, hideForm, createElement, createInput, createLabel, toggleAddTaskButton } from "./addTask";
 import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
+import { saveProjectsToStorage } from "./localStorage";
 import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
 export let projects = [];
 export let selectedProject = null;
@@ -11,7 +12,7 @@ export function setSelectedProject(projectName){
         toggleAddTaskButton();
     }
 }
-function Project(id, name) {
+export function Project(id, name) {
     return {
         id, 
         name,
@@ -32,6 +33,7 @@ export function removeProject(projectName){
     const index = projects.findIndex(project => project.name === projectName);
     if (index > -1) {
         projects.splice(index, 1);
+        localStorage.setItem('projects', JSON.stringify(projects));
     }
 }
 
@@ -55,6 +57,7 @@ export function addProject(name){
     const newProject = Project(projects.length+1, name);
     setSelectedProject(name);
     projects.push(newProject);
+    saveProjectsToStorage();
 }
 
 export function addTasktoProject(projectName, task) {
@@ -66,6 +69,7 @@ export function addTasktoProject(projectName, task) {
             alert(`A task with the name "${task.title}" already exists in the project "${projectName}".`);
         } else {
             project.tasks.push(task);
+            localStorage.setItem('projects', JSON.stringify(projects));
             alert(`Task "${task.title}" added successfully to project "${projectName}".`);
         }
     }
