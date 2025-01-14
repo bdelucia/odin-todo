@@ -218,7 +218,7 @@ select option:hover {
 
 .project-container {
   position: relative;
-  display: inline-block;
+  display: flex;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
   white-space: nowrap;
@@ -242,22 +242,19 @@ select option:hover {
 
 /* Delete button that is initially hidden */
 .delete-project-button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 5px;
-  font-size: 12px;
-  background-color: red;
-  color: white;
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px; /* Adjust size */
+  height: 20px; /* Adjust size */
+  margin-left: 10px;
   cursor: pointer;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
-.project-container:hover .delete-project-button {
-  opacity: 1; /* Delete button becomes visible on hover */
+.delete-project-button:hover {
+  opacity: 1;
 }
 
 #form, #projectForm {

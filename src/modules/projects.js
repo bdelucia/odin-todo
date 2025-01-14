@@ -2,7 +2,6 @@ import { createOverlay, showForm, hideForm, createElement, createInput, createLa
 import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
 import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
-import deleteButtonSVG from '../assets/delete-svgrepo-com.svg';
 export let projects = [];
 export let selectedProject = null;
 
@@ -24,12 +23,11 @@ export function getProject(projectName){
     return projects.find(project => project.name === projectName) || false;
 }
 
-function addProjectToSidebar(projectName){
-    const projectsSidebarContainer = document.getElementById('projectsSidebarContainer');
-    
-    const projectButton = document.createElement('button');
-    projectButton.textContent = projectName;
-    projectsSidebarContainer.appendChild(projectButton);
+export function removeProject(projectName){
+    const index = projects.findIndex(project => project.name === projectName);
+    if (index > -1) {
+        projects.splice(index, 1);
+    }
 }
 
 function createProjectForm(){
@@ -50,7 +48,6 @@ function createProjectForm(){
 
 export function addProject(name){
     const newProject = Project(projects.length+1, name);
-    addProjectToSidebar(name);
     setSelectedProject(name);
     projects.push(newProject);
 }
@@ -93,7 +90,6 @@ export function addProjectFormHandler(){
         renderSidebar();
         hideForm(form, overlay);
         projectInput.value = "";
-        printProjects();
         renderTasks();
     });
     closeBtn.addEventListener('click', () => {
