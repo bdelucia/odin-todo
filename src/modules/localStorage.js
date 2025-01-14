@@ -22,3 +22,6 @@ export function saveProjectsToStorage() {
     localStorage.setItem('projects', JSON.stringify(projects));
 }
 
+export function clearLocalStorage(){
+    
+}

@@ -22,6 +22,11 @@ function createTaskItem(task, id) {
             taskItem.style.backgroundColor = '#FF8A80'; // Pastel red
             taskItem.style.color = '#660000'; // Dark red for readability
             break;
+        default:
+            // Default case - uses CSS variables for background and text color
+            taskItem.style.backgroundColor = 'var(--primary-color)';
+            taskItem.style.color = 'var(--text-color)';
+            break;
     }
 
     const projectTitle = createElement('text', { id: 'projectTitle' });
