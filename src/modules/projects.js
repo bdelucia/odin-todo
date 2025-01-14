@@ -49,8 +49,8 @@ function createProjectForm(){
     projectSubmitBtn.textContent = 'Submit';
 
     projectInput.addEventListener('input', () => {
-        if (projectInput.value.length > 25) {
-            projectInput.value = projectInput.value.slice(0, 25); // Trim input if it exceeds 25 characters
+        if (projectInput.value.length > 20) {
+            projectInput.value = projectInput.value.slice(0, 20); // Trim input if it exceeds 25 characters
         }
     });
 
@@ -63,8 +63,6 @@ export function addProject(name){
     name = name.trim();
     if (projects.length >= 6) {
         alert('Can only have 6 projects max!');
-    } else if (name.length > 20) {
-        alert('Project name must be 20 characters or fewer!');
     } else if (projects.find(proj => proj.name === name)) {
         alert('Project with the same name already exists!');
     } else {

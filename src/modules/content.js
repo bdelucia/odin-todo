@@ -9,6 +9,21 @@ function createTaskItem(task, id) {
     const taskItem = createElement('div', { class: 'taskItem' });
     taskItem.dataset.id = id;
 
+    switch (task.priority) {
+        case 'low':
+            taskItem.style.backgroundColor = '#A8E6A3'; // Pastel green
+            taskItem.style.color = '#2F4F2F'; // Dark green for readability
+            break;
+        case 'medium':
+            taskItem.style.backgroundColor = '#FFD54F'; // Pastel yellow
+            taskItem.style.color = '#3E2A47'; // Dark brown for readability
+            break;
+        case 'high':
+            taskItem.style.backgroundColor = '#FF8A80'; // Pastel red
+            taskItem.style.color = '#660000'; // Dark red for readability
+            break;
+    }
+
     const projectTitle = createElement('text', { id: 'projectTitle' });
     projectTitle.textContent = task.projectName;
     taskItem.appendChild(projectTitle);
