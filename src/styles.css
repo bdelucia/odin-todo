@@ -219,11 +219,9 @@ select option:hover {
 .project-container {
   position: relative;
   display: flex;
-  transition: width 0.3s ease-in-out;
-  overflow: hidden;
-  white-space: nowrap;
+  align-items: center;
   margin: 5px 0;
-  max-width: 200px;
+  width: 100%;
 }
 
 .project-button {
@@ -233,18 +231,14 @@ select option:hover {
   background-color: #4CAF50;
   color: white;
   cursor: pointer;
-  transition: width 0.3s ease-in-out;
-  flex-grow: 0;
 }
 
-
-/* Delete button that is initially hidden */
 .delete-project-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px; /* Adjust size */
-  height: 20px; /* Adjust size */
+  width: 20px;
+  height: 20px;
   margin-left: 10px;
   cursor: pointer;
   opacity: 0.7;

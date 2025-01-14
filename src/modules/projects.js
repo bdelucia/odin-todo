@@ -54,10 +54,19 @@ function createProjectForm(){
 }
 
 export function addProject(name){
-    const newProject = Project(projects.length+1, name);
-    setSelectedProject(name);
-    projects.push(newProject);
-    saveProjectsToStorage();
+    name = name.trim();
+    if (projects.length >= 6) {
+        alert('Can only have 6 projects max!');
+    } else if (name.length > 20) {
+        alert('Project name must be 20 characters or fewer!');
+    } else if (projects.find(proj => proj.name === name)) {
+        alert('Project with the same name already exists!');
+    } else {
+        const newProject = Project(projects.length + 1, name);
+        setSelectedProject(name);
+        projects.push(newProject);
+        saveProjectsToStorage();
+    }  
 }
 
 export function addTasktoProject(projectName, task) {
