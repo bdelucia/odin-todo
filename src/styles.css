@@ -95,12 +95,21 @@ input[required]:valid {
   background-color: var(--text-color);
 }
 
-#close-button, .delete-button {
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}
+
+#close-button, .delete-button, .edit-button {
   display: flex;
   height: 25px;
   width: auto;
-  margin-left: auto;
   cursor: pointer;
+}
+
+#close-button, .edit-button {
+  margin-left: auto;
 }
 
 select {
@@ -141,7 +150,7 @@ select option:hover {
   background-color: #f1f1f1;        /* Light background on hover */
 }
 
-.delete-button {
+.delete-button, .edit-button {
   width: 30px;                /* Size of the SVG icon */
   height: 30px;
   background-color: transparent; /* Transparent background */
@@ -151,21 +160,15 @@ select option:hover {
 }
 
 /* Hover effect */
-.delete-button:hover, .delete-project-button:hover {
+.delete-button:hover, .delete-project-button:hover, .edit-button:hover {
   transform: scale(1.2);         /* Slightly scale up the icon */
   fill: #ff4d4d;                 /* Change color to red on hover */
 }
 
 /* Active state (when button is clicked) */
-.delete-button:active, .delete-project-button:active {
+.delete-button:active, .delete-project-button:active, .edit-button:active {
   transform: scale(0.95);        /* Scale down the icon to give a click effect */
   fill: #d43f3a;                 /* Darker red color when clicked */
-}
-
-/* Focus state for accessibility */
-.delete-button:focus {
-  outline: 2px solid #ff4d4d;    /* Red outline on focus for accessibility */
-  outline-offset: 4px;
 }
 
 .delete-button path {

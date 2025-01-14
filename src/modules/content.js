@@ -1,6 +1,7 @@
 import { getProject, projects, selectedProject } from "./projects.js";
 import { createElement } from "./addTask.js";
 import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
+import editButtonSVG from '../assets/edit-svgrepo-com.svg';
 import { getTasksDueToday, getTasksDueThisWeek } from "./dates.js";
 import { getImportantTasks } from "./priority.js";
 // Create task elements and populate content
@@ -32,7 +33,16 @@ function createTaskItem(task, id) {
     deleteTaskBtn.addEventListener('click', () => {
         handleDeleteTask(id);
     });
-    taskItem.appendChild(deleteTaskBtn);
+
+    const editTaskBtn = createElement('img', { src: editButtonSVG, class: 'edit-button' });
+    editTaskBtn.addEventListener('click', () => {
+        handleEditTask(id);
+    })
+
+    const buttonContainer = createElement('div', { class: 'buttons-container' });
+    buttonContainer.appendChild(editTaskBtn);
+    buttonContainer.appendChild(deleteTaskBtn);
+    taskItem.appendChild(buttonContainer);
 
     return taskItem;
 }
@@ -160,4 +170,8 @@ function handleDeleteTask(taskId){
     } else {
         renderAllTasks();
     }
+}
+
+function handleEditTask(taskId){
+
 }
