@@ -2,6 +2,7 @@ import { createOverlay, showForm, hideForm, createElement, createInput, createLa
 import { renderSidebar } from "./sidebar";
 import { renderTasks } from "./content";
 import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
+import deleteButtonSVG from '../assets/delete-svgrepo-com.svg';
 export let projects = [];
 export let selectedProject = null;
 
@@ -25,6 +26,7 @@ export function getProject(projectName){
 
 function addProjectToSidebar(projectName){
     const projectsSidebarContainer = document.getElementById('projectsSidebarContainer');
+    
     const projectButton = document.createElement('button');
     projectButton.textContent = projectName;
     projectsSidebarContainer.appendChild(projectButton);

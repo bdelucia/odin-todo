@@ -41,5 +41,4 @@ export function sidebarButtonsHandler(){
         setSelectedProject(null);
         renderImportantTasks();
     });
-
 }
