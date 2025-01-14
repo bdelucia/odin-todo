@@ -120,11 +120,11 @@ function printTaskList(project){
 export function toggleAddTaskButton() {
     const addTaskBtn = document.getElementById("addTaskBtn");
     if (selectedProject) {
-        addTaskBtn.disabled = false; // Enable the button
-        addTaskBtn.classList.remove("disabled"); // Optional: update styling
+        addTaskBtn.disabled = false; 
+        addTaskBtn.classList.remove("disabled"); 
     } else {
-        addTaskBtn.disabled = true; // Disable the button
-        addTaskBtn.classList.add("disabled"); // Optional: update styling
+        addTaskBtn.disabled = true; 
+        addTaskBtn.classList.add("disabled"); 
     }
 }
 

@@ -1,5 +1,5 @@
 import { projects, Project } from "./projects";
-import { renderAllTasks, renderTasks } from "./content";
+import { renderAllTasks } from "./content";
 import { toggleAddTaskButton } from "./addTask";
 export function initializeProjects() {
     const storedProjects = localStorage.getItem('projects');
@@ -11,8 +11,8 @@ export function initializeProjects() {
     } else {
         // Clear the current array and populate it with stored projects
         const loadedProjects = JSON.parse(storedProjects);
-        projects.length = 0; // Clear the array
-        projects.push(...loadedProjects); // Add stored projects
+        projects.length = 0;
+        projects.push(...loadedProjects); 
         toggleAddTaskButton();
         renderAllTasks();
     }

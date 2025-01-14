@@ -79,7 +79,6 @@ export function addTasktoProject(projectName, task) {
         } else {
             project.tasks.push(task);
             localStorage.setItem('projects', JSON.stringify(projects));
-            alert(`Task "${task.title}" added successfully to project "${projectName}".`);
         }
     }
 }

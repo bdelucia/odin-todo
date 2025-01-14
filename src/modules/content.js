@@ -13,7 +13,7 @@ function createTaskItem(task, id) {
     taskItem.appendChild(projectTitle);
 
     const elements = [
-        { id: 'taskItemTitle', label: 'Title', value: task.title },
+        { id: 'taskItemTitle', label: 'Task', value: task.title },
         { id: 'taskItemDesc', label: 'Description', value: task.desc },
         { id: 'taskItemDueDate', label: 'Due Date', value: task.dueDate },
         { id: 'taskItemPriority', label: 'Priority', value: task.priority },
@@ -21,6 +21,9 @@ function createTaskItem(task, id) {
 
     elements.forEach(({ id, label, value }) => {
         const element = createElement('div', { id });
+        if(!value || value === ''){
+            value = "None provided."
+        }
         element.textContent = `${label}: ${value}`;
         taskItem.appendChild(element);
     });
