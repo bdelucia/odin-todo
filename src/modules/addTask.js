@@ -1,4 +1,4 @@
-import { projects, selectedProject, setSelectedProject, addTasktoProject, getProject } from "./projects.js";
+import { selectedProject, addTasktoProject, getProject } from "./projects.js";
 import { renderTasks } from "./content.js";
 import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
 

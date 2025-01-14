@@ -24,6 +24,11 @@ export function getProject(projectName){
 }
 
 export function removeProject(projectName){
+    if(projects.length === 1){
+        alert('Must have at least 1 project to add tasks to!');
+        return;
+    }
+
     const index = projects.findIndex(project => project.name === projectName);
     if (index > -1) {
         projects.splice(index, 1);

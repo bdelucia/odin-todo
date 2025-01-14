@@ -1,10 +1,10 @@
 import './styles.css'
-import projectItem, { addProjectFormHandler } from './modules/projects.js'
+import { addProjectFormHandler } from './modules/projects.js'
 import { addTaskFormHandler, createTaskForm } from './modules/addTask.js'
 import { addProject, addTasktoProject,  printProjects} from './modules/projects.js';
 import { sidebarButtonsHandler, renderSidebar } from './modules/sidebar.js';
 
-addProject('Default Project');
+addProject('Unlisted');
 renderSidebar();
 
 // brings up form when addTaskBtn is pressed

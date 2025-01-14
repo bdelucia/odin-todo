@@ -1,5 +1,5 @@
 import { renderTasks, renderAllTasks, renderTasksDueToday, renderTasksDueThisWeek, renderImportantTasks} from "./content";
-import { projects, selectedProject, setSelectedProject, removeProject } from "./projects.js";
+import { projects, setSelectedProject, removeProject } from "./projects.js";
 import { toggleAddTaskButton } from "./addTask.js";
 import deleteButtonSVG from '../assets/delete-svgrepo-com.svg';
 export function renderSidebar() {
@@ -8,9 +8,8 @@ export function renderSidebar() {
 
     // Render each project with a container for the button and delete button
     projects.forEach((project) => {
-        // Create the container for the project (includes the project button and delete button)
         const projectContainer = document.createElement('div');
-        projectContainer.classList.add('project-container'); // Add a class for styling
+        projectContainer.classList.add('project-container'); 
 
         // Create the project button
         const button = document.createElement("button");
@@ -21,13 +20,11 @@ export function renderSidebar() {
             renderTasks(); 
         });
 
-        // Create the delete button (image of SVG)
         const deleteBtn = document.createElement("img");
-        deleteBtn.src = deleteButtonSVG; // Add the correct path to your delete button SVG
+        deleteBtn.src = deleteButtonSVG;
         deleteBtn.classList.add("delete-project-button");
         deleteBtn.style.display = "none"; // Initially hidden
 
-        // Add hover effect to show the delete button when hovering over the container
         projectContainer.addEventListener("mouseenter", () => {
             deleteBtn.style.display = "block"; // Show delete button
         });
@@ -35,16 +32,10 @@ export function renderSidebar() {
             deleteBtn.style.display = "none"; // Hide delete button when not hovering
         });
 
-        // Delete button functionality (you can implement your own function here)
         deleteBtn.addEventListener('click', () => {
-            removeProject(project.name); // Function to remove project
-            sidebar.removeChild(projectContainer); // Remove the project container from the sidebar
+            removeProject(project.name); 
+            sidebar.removeChild(projectContainer); 
             renderSidebar();
-            if(selectedProject){
-                renderTasks()
-            } else {
-                renderAllTasks();
-            }
         });
 
         // Append the project button and delete button to the container

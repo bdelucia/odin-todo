@@ -223,6 +223,7 @@ select option:hover {
   overflow: hidden;
   white-space: nowrap;
   margin: 5px 0;
+  max-width: 200px;
 }
 
 .project-button {
@@ -233,12 +234,9 @@ select option:hover {
   color: white;
   cursor: pointer;
   transition: width 0.3s ease-in-out;
-  width: 150px; /* Set initial width */
+  flex-grow: 0;
 }
 
-.project-container:hover .project-button {
-  width: 200px; /* Width grows when hovered */
-}
 
 /* Delete button that is initially hidden */
 .delete-project-button {
