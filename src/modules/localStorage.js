@@ -1,6 +1,7 @@
 import { projects, Project } from "./projects";
 import { renderAllTasks } from "./content";
 import { toggleAddTaskButton, showForm, hideForm, createOverlay, createElement } from "./addTask";
+
 export function initializeProjects() {
     const storedProjects = localStorage.getItem('projects');
     if (!storedProjects || JSON.parse(storedProjects).length === 0) {
@@ -57,8 +58,4 @@ export function createConfirmationForm() {
     document.body.appendChild(form);
     
     return form;
-}
-
-export function clearLocalStorage(){
-
 }
