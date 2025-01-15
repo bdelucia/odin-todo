@@ -40,6 +40,8 @@ export function renderSidebar() {
             removeProject(project.name); 
             projectsSidebarContainer.removeChild(projectContainer); 
             renderSidebar();
+            setSelectedProject(projects[0].name);
+            renderTasks();
         });
 
         // Append the project button and delete button to the container
