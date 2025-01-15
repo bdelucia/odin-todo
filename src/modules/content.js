@@ -139,7 +139,7 @@ export function renderTasksDueThisWeek(){
     tasksContainer.innerHTML = "";
 
     const newh3 = createElement('h3');
-    newh3.textContent = `Tasks due today`;
+    newh3.textContent = `Tasks due this week`;
     content.insertBefore(newh3, content.firstChild);
 
     const tasksDueThisWeek = getTasksDueThisWeek();
