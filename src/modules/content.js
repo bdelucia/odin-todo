@@ -4,6 +4,7 @@ import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
 import editButtonSVG from '../assets/edit-svgrepo-com.svg';
 import { getTasksDueToday, getTasksDueThisWeek } from "./dates.js";
 import { getImportantTasks } from "./priority.js";
+
 // Create task elements and populate content
 function createTaskItem(task, id) {
     const taskItem = createElement('div', { class: 'taskItem' });

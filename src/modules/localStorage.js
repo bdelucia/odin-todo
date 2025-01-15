@@ -1,6 +1,6 @@
 import { projects, Project } from "./projects";
 import { renderAllTasks } from "./content";
-import { toggleAddTaskButton, showForm, hideForm, createOverlay, createElement } from "./addTask";
+import { toggleAddTaskButton, hideForm, createOverlay, createElement } from "./addTask";
 
 export function initializeProjects() {
     const storedProjects = localStorage.getItem('projects');
