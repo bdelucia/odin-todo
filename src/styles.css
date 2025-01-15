@@ -123,11 +123,23 @@ input[required]:valid {
   gap: 10px;
 }
 
+.buttons-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: fit-content;
+  padding: 2px;
+  border-radius: 4px;
+}
+
 #close-button, .delete-button, .edit-button, .clear-storage-button, .dark-light-theme-button {
   display: flex;
   height: 25px;
   width: auto;
   cursor: pointer;
+}
+
+.edit-button {
+  height: 25px;
+  width: 25px;
 }
 
 #close-button, .edit-button {
@@ -170,8 +182,6 @@ select option:hover {
 }
 
 .delete-button, .edit-button, .clear-storage-button, .dark-light-theme-button {
-  width: 30px;                /* Size of the SVG icon */
-  height: 30px;
   background-color: transparent; /* Transparent background */
   border: none;               /* No border */
   cursor: pointer;            /* Pointer cursor on hover */
@@ -182,6 +192,10 @@ select option:hover {
 .delete-button:hover, .delete-project-button:hover, .edit-button:hover, .clear-storage-button:hover, .dark-light-theme-button:hover {
   transform: scale(1.2);         /* Slightly scale up the icon */
   fill: #ff4d4d;                 /* Change color to red on hover */
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
 }
 
 /* Active state (when button is clicked) */
