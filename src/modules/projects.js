@@ -8,9 +8,7 @@ export let selectedProject = null;
 
 export function setSelectedProject(projectName){
     selectedProject = projectName;
-    if(selectedProject === null){
-        toggleAddTaskButton();
-    }
+    toggleAddTaskButton();
 }
 export function Project(id, name) {
     return {
