@@ -1,19 +1,19 @@
-import { projects, Project } from "./projects";
-import { renderAllTasks } from "./content";
+import { projects, Project } from './projects';
+import { renderAllTasks } from './content';
 import {
   toggleAddTaskButton,
   hideForm,
   createOverlay,
   createElement,
-} from "./addTask";
+} from './addTask';
 
 export function initializeProjects() {
-  const storedProjects = localStorage.getItem("projects");
+  const storedProjects = localStorage.getItem('projects');
   if (!storedProjects || JSON.parse(storedProjects).length === 0) {
     // Add a default project
-    const defaultProject = Project(1, "Unlisted");
+    const defaultProject = Project(1, 'Unlisted');
     projects.push(defaultProject);
-    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem('projects', JSON.stringify(projects));
   } else {
     // Clear the current array and populate it with stored projects
     const loadedProjects = JSON.parse(storedProjects);
@@ -25,32 +25,32 @@ export function initializeProjects() {
 }
 
 export function saveProjectsToStorage() {
-  localStorage.setItem("projects", JSON.stringify(projects));
+  localStorage.setItem('projects', JSON.stringify(projects));
 }
 
 export function createConfirmationForm() {
   // Create the overlay and form container
   const overlay = createOverlay();
-  const form = createElement("form", { id: "confirmation-form" });
+  const form = createElement('form', { id: 'confirmation-form' });
 
   // Create the description paragraph
-  const description = createElement("p");
+  const description = createElement('p');
   description.textContent =
-    "This action will reset all projects and tasks. Are you sure you want to continue?";
+    'This action will reset all projects and tasks. Are you sure you want to continue?';
 
   // Create the continue button
-  const continueButton = createElement("button", { type: "submit" });
-  continueButton.textContent = "Continue";
-  continueButton.addEventListener("click", () => {
+  const continueButton = createElement('button', { type: 'submit' });
+  continueButton.textContent = 'Continue';
+  continueButton.addEventListener('click', () => {
     // Handle the action (resetting projects and tasks or other logic)
     localStorage.clear();
     hideForm(form, overlay); // Hide the form after confirmation
   });
 
   // Create the cancel button (optional, for user to cancel the action)
-  const cancelButton = createElement("button", { type: "submit" });
-  cancelButton.textContent = "Cancel";
-  cancelButton.addEventListener("click", () => {
+  const cancelButton = createElement('button', { type: 'submit' });
+  cancelButton.textContent = 'Cancel';
+  cancelButton.addEventListener('click', () => {
     hideForm(form, overlay); // Just hide the form without doing anything
   });
 

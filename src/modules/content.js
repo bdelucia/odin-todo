@@ -1,4 +1,4 @@
-import { getProject, projects, selectedProject } from "./projects.js";
+import { getProject, projects, selectedProject } from './projects.js';
 import {
   createElement,
   createTaskForm,
@@ -6,74 +6,74 @@ import {
   hideForm,
   createOverlay,
   getFormValues,
-} from "./addTask.js";
-import deleteButtonSVG from "../assets/delete-svgrepo-com.svg";
-import editButtonSVG from "../assets/edit-svgrepo-com.svg";
-import { getTasksDueToday, getTasksDueThisWeek } from "./dates.js";
-import { getImportantTasks } from "./priority.js";
+} from './addTask.js';
+import deleteButtonSVG from '../assets/delete-svgrepo-com.svg';
+import editButtonSVG from '../assets/edit-svgrepo-com.svg';
+import { getTasksDueToday, getTasksDueThisWeek } from './dates.js';
+import { getImportantTasks } from './priority.js';
 
 // Create task elements and populate content
 function createTaskItem(task, id) {
-  const taskItem = createElement("div", { class: "taskItem" });
+  const taskItem = createElement('div', { class: 'taskItem' });
   taskItem.dataset.id = id;
 
   switch (task.priority) {
-    case "low":
-      taskItem.style.backgroundColor = "#A8E6A3"; // Pastel green
-      taskItem.style.color = "#2F4F2F"; // Dark green for readability
+    case 'low':
+      taskItem.style.backgroundColor = '#A8E6A3'; // Pastel green
+      taskItem.style.color = '#2F4F2F'; // Dark green for readability
       break;
-    case "medium":
-      taskItem.style.backgroundColor = "#FFD54F"; // Pastel yellow
-      taskItem.style.color = "#3E2A47"; // Dark brown for readability
+    case 'medium':
+      taskItem.style.backgroundColor = '#FFD54F'; // Pastel yellow
+      taskItem.style.color = '#3E2A47'; // Dark brown for readability
       break;
-    case "high":
-      taskItem.style.backgroundColor = "#FF8A80"; // Pastel red
-      taskItem.style.color = "#660000"; // Dark red for readability
+    case 'high':
+      taskItem.style.backgroundColor = '#FF8A80'; // Pastel red
+      taskItem.style.color = '#660000'; // Dark red for readability
       break;
     default:
       // Default case - uses CSS variables for background and text color
-      taskItem.style.backgroundColor = "var(--primary-color)";
-      taskItem.style.color = "var(--text-color)";
+      taskItem.style.backgroundColor = 'var(--primary-color)';
+      taskItem.style.color = 'var(--text-color)';
       break;
   }
 
-  const projectTitle = createElement("text", { id: "projectTitle" });
+  const projectTitle = createElement('text', { id: 'projectTitle' });
   projectTitle.textContent = task.projectName;
   taskItem.appendChild(projectTitle);
 
   const elements = [
-    { id: "taskItemTitle", label: "Task", value: task.title },
-    { id: "taskItemDesc", label: "Description", value: task.desc },
-    { id: "taskItemDueDate", label: "Due Date", value: task.dueDate },
-    { id: "taskItemPriority", label: "Priority", value: task.priority },
+    { id: 'taskItemTitle', label: 'Task', value: task.title },
+    { id: 'taskItemDesc', label: 'Description', value: task.desc },
+    { id: 'taskItemDueDate', label: 'Due Date', value: task.dueDate },
+    { id: 'taskItemPriority', label: 'Priority', value: task.priority },
   ];
 
   elements.forEach(({ id, label, value }) => {
-    const element = createElement("div", { id });
-    if (!value || value === "") {
-      value = "None provided.";
+    const element = createElement('div', { id });
+    if (!value || value === '') {
+      value = 'None provided.';
     }
     element.textContent = `${label}: ${value}`;
     taskItem.appendChild(element);
   });
 
-  const deleteTaskBtn = createElement("img", {
+  const deleteTaskBtn = createElement('img', {
     src: deleteButtonSVG,
-    class: "delete-button",
+    class: 'delete-button',
   });
-  deleteTaskBtn.addEventListener("click", () => {
+  deleteTaskBtn.addEventListener('click', () => {
     handleDeleteTask(id);
   });
 
-  const editTaskBtn = createElement("img", {
+  const editTaskBtn = createElement('img', {
     src: editButtonSVG,
-    class: "edit-button",
+    class: 'edit-button',
   });
-  editTaskBtn.addEventListener("click", () => {
+  editTaskBtn.addEventListener('click', () => {
     handleEditTask(id);
   });
 
-  const buttonContainer = createElement("div", { class: "buttons-container" });
+  const buttonContainer = createElement('div', { class: 'buttons-container' });
   buttonContainer.appendChild(editTaskBtn);
   buttonContainer.appendChild(deleteTaskBtn);
   taskItem.appendChild(buttonContainer);
@@ -82,16 +82,16 @@ function createTaskItem(task, id) {
 }
 
 export function renderTasks() {
-  const tasksContainer = document.getElementById("tasksContainer");
-  const content = document.getElementById("content");
-  const existingh3 = content.querySelector("h3");
+  const tasksContainer = document.getElementById('tasksContainer');
+  const content = document.getElementById('content');
+  const existingh3 = content.querySelector('h3');
   if (existingh3) content.removeChild(existingh3);
-  tasksContainer.innerHTML = "";
+  tasksContainer.innerHTML = '';
 
   if (selectedProject) {
     const projectToShow = getProject(selectedProject);
 
-    const newh3 = createElement("h3");
+    const newh3 = createElement('h3');
     newh3.textContent = `${selectedProject} Tasks`;
     content.insertBefore(newh3, content.firstChild);
 
@@ -101,18 +101,18 @@ export function renderTasks() {
       tasksContainer.appendChild(taskItem);
     });
   } else {
-    alert("No project selected. Please select a project.");
+    alert('No project selected. Please select a project.');
   }
 }
 
 export function renderAllTasks() {
-  const tasksContainer = document.getElementById("tasksContainer");
-  const content = document.getElementById("content");
-  const existingh3 = content.querySelector("h3");
+  const tasksContainer = document.getElementById('tasksContainer');
+  const content = document.getElementById('content');
+  const existingh3 = content.querySelector('h3');
   if (existingh3) content.removeChild(existingh3);
-  tasksContainer.innerHTML = "";
+  tasksContainer.innerHTML = '';
 
-  const newh3 = createElement("h3");
+  const newh3 = createElement('h3');
   newh3.textContent = `All tasks`;
   content.insertBefore(newh3, content.firstChild);
 
@@ -126,13 +126,13 @@ export function renderAllTasks() {
 }
 
 export function renderTasksDueToday() {
-  const tasksContainer = document.getElementById("tasksContainer");
-  const content = document.getElementById("content");
-  const existingh3 = content.querySelector("h3");
+  const tasksContainer = document.getElementById('tasksContainer');
+  const content = document.getElementById('content');
+  const existingh3 = content.querySelector('h3');
   if (existingh3) content.removeChild(existingh3);
-  tasksContainer.innerHTML = "";
+  tasksContainer.innerHTML = '';
 
-  const newh3 = createElement("h3");
+  const newh3 = createElement('h3');
   newh3.textContent = `Tasks due today`;
   content.insertBefore(newh3, content.firstChild);
 
@@ -146,13 +146,13 @@ export function renderTasksDueToday() {
 }
 
 export function renderTasksDueThisWeek() {
-  const tasksContainer = document.getElementById("tasksContainer");
-  const content = document.getElementById("content");
-  const existingh3 = content.querySelector("h3");
+  const tasksContainer = document.getElementById('tasksContainer');
+  const content = document.getElementById('content');
+  const existingh3 = content.querySelector('h3');
   if (existingh3) content.removeChild(existingh3);
-  tasksContainer.innerHTML = "";
+  tasksContainer.innerHTML = '';
 
-  const newh3 = createElement("h3");
+  const newh3 = createElement('h3');
   newh3.textContent = `Tasks due this week`;
   content.insertBefore(newh3, content.firstChild);
 
@@ -166,13 +166,13 @@ export function renderTasksDueThisWeek() {
 }
 
 export function renderImportantTasks() {
-  const tasksContainer = document.getElementById("tasksContainer");
-  const content = document.getElementById("content");
-  const existingh3 = content.querySelector("h3");
+  const tasksContainer = document.getElementById('tasksContainer');
+  const content = document.getElementById('content');
+  const existingh3 = content.querySelector('h3');
   if (existingh3) content.removeChild(existingh3);
-  tasksContainer.innerHTML = "";
+  tasksContainer.innerHTML = '';
 
-  const newh3 = createElement("h3");
+  const newh3 = createElement('h3');
   newh3.textContent = `Tasks with High priority`;
   content.insertBefore(newh3, content.firstChild);
 
@@ -186,7 +186,7 @@ export function renderImportantTasks() {
 }
 
 function handleDeleteTask(taskId) {
-  const [projectName, taskIndex] = taskId.split("-");
+  const [projectName, taskIndex] = taskId.split('-');
   const project = projects.find((proj) => proj.name === projectName);
 
   if (project) {
@@ -209,17 +209,17 @@ function handleDeleteTask(taskId) {
 }
 
 function handleEditTask(taskId) {
-  const [projectName, taskIndex] = taskId.split("-");
+  const [projectName, taskIndex] = taskId.split('-');
   const project = projects.find((proj) => proj.name === projectName);
   const task = project.tasks[taskIndex]; // Assuming tasks is an array
 
   // Create form and populate with existing task values
   const form = createTaskForm();
 
-  const titleInput = form.querySelector("#title");
-  const descInput = form.querySelector("#desc");
-  const dueDateInput = form.querySelector("#dueDate");
-  const prioritySelect = form.querySelector("#priority");
+  const titleInput = form.querySelector('#title');
+  const descInput = form.querySelector('#desc');
+  const dueDateInput = form.querySelector('#dueDate');
+  const prioritySelect = form.querySelector('#priority');
 
   titleInput.value = task.title;
   descInput.value = task.desc;
@@ -233,7 +233,7 @@ function handleEditTask(taskId) {
   showForm(form, overlay);
 
   // Handle form submission to update task
-  form.addEventListener("submit", (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault(); // Prevent form submission
 
     const updatedValues = getFormValues(form);
@@ -252,8 +252,8 @@ function handleEditTask(taskId) {
   });
 
   // Close button listener (optional)
-  const closeButton = form.querySelector("#close-button");
-  closeButton.addEventListener("click", () => {
+  const closeButton = form.querySelector('#close-button');
+  closeButton.addEventListener('click', () => {
     hideForm(form, overlay);
   });
 }

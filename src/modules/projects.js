@@ -6,11 +6,11 @@ import {
   createInput,
   createLabel,
   toggleAddTaskButton,
-} from "./addTask";
-import { renderSidebar } from "./sidebar";
-import { renderTasks } from "./content";
-import { saveProjectsToStorage } from "./localStorage";
-import closeButtonSVG from "../assets/close-circle-svgrepo-com.svg";
+} from './addTask';
+import { renderSidebar } from './sidebar';
+import { renderTasks } from './content';
+import { saveProjectsToStorage } from './localStorage';
+import closeButtonSVG from '../assets/close-circle-svgrepo-com.svg';
 export let projects = [];
 export let selectedProject = null;
 
@@ -32,40 +32,40 @@ export function getProject(projectName) {
 
 export function removeProject(projectName) {
   if (projects.length === 1) {
-    alert("Must have at least 1 project to add tasks to!");
+    alert('Must have at least 1 project to add tasks to!');
     return;
   }
 
   const index = projects.findIndex((project) => project.name === projectName);
   if (index > -1) {
     projects.splice(index, 1);
-    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem('projects', JSON.stringify(projects));
   }
 }
 
 function createProjectForm() {
-  const form = createElement("form", { id: "projectForm" });
+  const form = createElement('form', { id: 'projectForm' });
 
-  const closeBtn = createElement("img", {
+  const closeBtn = createElement('img', {
     src: closeButtonSVG,
-    id: "close-button",
+    id: 'close-button',
   });
 
-  const projectLabel = createLabel("projectName", "Project name: ");
+  const projectLabel = createLabel('projectName', 'Project name: ');
   const projectInput = createInput(
-    "projectName",
-    "text",
+    'projectName',
+    'text',
     `Enter your project's name`,
     true,
   ); // title is required
 
-  const projectSubmitBtn = createElement("button", {
-    type: "submit",
-    id: "projectSubmitBtn",
+  const projectSubmitBtn = createElement('button', {
+    type: 'submit',
+    id: 'projectSubmitBtn',
   });
-  projectSubmitBtn.textContent = "Submit";
+  projectSubmitBtn.textContent = 'Submit';
 
-  projectInput.addEventListener("input", () => {
+  projectInput.addEventListener('input', () => {
     if (projectInput.value.length > 20) {
       projectInput.value = projectInput.value.slice(0, 20); // Trim input if it exceeds 25 characters
     }
@@ -79,9 +79,9 @@ function createProjectForm() {
 export function addProject(name) {
   name = name.trim();
   if (projects.length >= 6) {
-    alert("Can only have 6 projects max!");
+    alert('Can only have 6 projects max!');
   } else if (projects.find((proj) => proj.name === name)) {
-    alert("Project with the same name already exists!");
+    alert('Project with the same name already exists!');
   } else {
     const newProject = Project(projects.length + 1, name);
     setSelectedProject(name);
@@ -103,13 +103,13 @@ export function addTasktoProject(projectName, task) {
       );
     } else {
       project.tasks.push(task);
-      localStorage.setItem("projects", JSON.stringify(projects));
+      localStorage.setItem('projects', JSON.stringify(projects));
     }
   }
 }
 
 function getProjectName(form) {
-  const projectName = form.querySelector("#projectName");
+  const projectName = form.querySelector('#projectName');
   return projectName.value;
 }
 
@@ -117,26 +117,26 @@ export function addProjectFormHandler() {
   const form = createProjectForm();
   const overlay = createOverlay();
 
-  const content = document.getElementById("content");
-  const addProjectBtn = document.getElementById("addProjectBtn");
+  const content = document.getElementById('content');
+  const addProjectBtn = document.getElementById('addProjectBtn');
 
-  const projectFormSubmitBtn = form.querySelector("#projectSubmitBtn");
-  const closeBtn = form.querySelector("#close-button");
-  const projectInput = form.querySelector("#projectName");
+  const projectFormSubmitBtn = form.querySelector('#projectSubmitBtn');
+  const closeBtn = form.querySelector('#close-button');
+  const projectInput = form.querySelector('#projectName');
 
   // Event listeners for showing and hiding the form
-  addProjectBtn.addEventListener("click", () => showForm(form, overlay));
-  projectFormSubmitBtn.addEventListener("click", (event) => {
+  addProjectBtn.addEventListener('click', () => showForm(form, overlay));
+  projectFormSubmitBtn.addEventListener('click', (event) => {
     event.preventDefault();
     addProject(getProjectName(form));
     renderSidebar();
     hideForm(form, overlay);
-    projectInput.value = "";
+    projectInput.value = '';
     renderTasks();
   });
-  closeBtn.addEventListener("click", () => {
+  closeBtn.addEventListener('click', () => {
     hideForm(form, overlay);
-    projectInput.value = "";
+    projectInput.value = '';
   });
 
   // appends the overlay with the form to content, by default its invisible
