@@ -1,16 +1,16 @@
 :root {
-  --primary-color: rgb(36, 36, 56);
-  --secondary-color: #00ffff;
+  --primary-color: #2c3e50;
+  --secondary-color: #4a6eaf;
 }
 
 .light-theme {
-  --primary-color: #f6f5f4;
-  --text-color: rgb(36, 36, 56);
+  --primary-color: #f9f9f9;
+  --text-color: #2c3e50;
 }
 
 .dark-theme {
-  --primary-color: rgb(36, 36, 56); /* Dark Background */
-  --text-color: #f6f5f4; /* Light Text */
+  --primary-color: #2c3e50; /* Dark Background */
+  --text-color: #f9f9f9; /* Light Text */
 }
 
 * {
@@ -30,9 +30,7 @@ body {
   flex-direction: column;
   background-color: var(--text-color);
   color: var(--primary-color);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #projectSubmitBtn,
@@ -164,9 +162,7 @@ select {
   appearance: auto; /* Use default dropdown arrow */
   outline: none; /* Remove focus outline */
   cursor: pointer; /* Pointer cursor on hover */
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease; /* Smooth transition effects */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
 }
 
 /* Hover effect on the select dropdown */
@@ -199,9 +195,7 @@ select option:hover {
   background-color: transparent; /* Transparent background */
   border: none; /* No border */
   cursor: pointer; /* Pointer cursor on hover */
-  transition:
-    transform 0.3s ease,
-    fill 0.3s ease; /* Smooth hover effect */
+  transition: transform 0.3s ease, fill 0.3s ease; /* Smooth hover effect */
 }
 
 /* Hover effect */
