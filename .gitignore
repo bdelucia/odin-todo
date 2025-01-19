@@ -145,3 +145,5 @@ out
 
 # ignore local builds
 dist/
+dist
+node_modules
